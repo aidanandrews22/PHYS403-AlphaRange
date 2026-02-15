@@ -1,0 +1,367 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{siunitx}
+
+\title{Range of Alpha Particles in Gas}
+
+\date{\today}
+
+\author{Aidan Andrews\\
+%   Department of Physics\\
+%   University of Illinois at Urbana-Champaign\\
+  \texttt{aidansa2}\\
+  \And
+  Tyler Wang\\
+%   Department of Physics\\
+%   University of Illinois at Urbana-Champaign\\
+  \texttt{tylerww3}\\
+}
+
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{PHYS 403}
+\renewcommand{\shorttitle}{Range of Alpha Particles in Gas}
+
+\hypersetup{
+pdftitle={Range of Alpha Particles in Gas},
+pdfsubject={Nuclear Physics, Alpha Particles, Energy Loss},
+pdfauthor={Aidan Andrews, Tyler Wang},
+pdfkeywords={Alpha Particles, Range, Energy Loss, Bethe Formula, Am-241},
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    % TODO: Write after results/discussion are complete.
+    % Should summarize: measured range of Am-241 alpha particles in air, He, Ar, N2
+    % using solid-state detector + MCA. Compare to Bethe formula predictions.
+    % Mention agreement/discrepancy with literature values.
+\end{abstract}
+
+% \keywords{Alpha Particles}
+
+%===============================================================================
+\section{Introduction}
+\label{sec:intro}
+%===============================================================================
+
+% PURPOSE: Motivate the experiment, state what we're measuring, and give theoretical background.
+
+% Alpha particles lose energy primarily through ionization and excitation of atoms in the medium.
+% The moving charged particle exerts electromagnetic forces on atomic electrons, imparting energy.
+% In single electronic collisions, only a small fraction of energy is transferred; deflection is also small.
+% Alpha particles therefore travel nearly straight, continuously losing energy in many collisions.
+
+% The average linear rate of energy loss (stopping power) for a heavy charged particle
+% is given by the Bethe formula:
+\begin{equation}
+    -\frac{dE}{dx} = \frac{4\pi k_0^2 z^2 e^4 n}{m c^2 \beta^2}
+    \left[ \ln \frac{2 m c^2 \beta^2}{I(1-\beta^2)} - \beta^2 \right]
+    \label{eq:bethe}
+\end{equation}
+% where:
+%   k_0 = 8.99e9 N m^2 C^{-2}
+%   z = atomic number of projectile (z=2 for alpha)
+%   e = electron charge
+%   n = number of electrons per unit volume in medium
+%   m = electron rest mass
+%   beta = v/c of the particle
+%   I = mean excitation energy of the medium
+
+% The mean excitation energy I depends on atomic number z_m of the medium:
+%   I ~ 19.0 eV                  for z_m = 1
+%   I ~ 11.2 + 11.7 * z_m  eV   for 2 <= z_m <= 13
+%   I ~ 52.8 + 8.71 * z_m  eV   for z_m > 13
+
+% For non-relativistic heavy particles (like 5.48 MeV alphas), the Bethe formula simplifies
+% and predicts dE/dx ~ 1/E, i.e., stopping power increases as the particle slows down.
+% This leads to a characteristic Bragg peak near end of range.
+
+% The range R of a charged particle (distance traveled before coming to rest) can be
+% related to the energy by:
+\begin{equation}
+    \frac{dE}{dx} = \frac{k}{E} \quad \Rightarrow \quad
+    R_0 = \frac{E_0^2}{2k}
+    \label{eq:range}
+\end{equation}
+% so E^2 vs x_eff should be linear if k is constant.
+
+% For alpha particles in air at 15 deg C and 760 Torr (from Melissinos):
+%   R = 0.56 * E       for E < 4 MeV
+%   R = 1.24 * E - 2.62  for 4 < E < 8 MeV
+
+% Two definitions of range:
+%   - Mean range R_m: absorber thickness that reduces alpha count by half
+%   - Extrapolated range R_e: extrapolate linear portion of transmission curve to zero
+
+% The effective distance through gas at reduced pressure is:
+\begin{equation}
+    X_{\text{eff}} = \frac{D \cdot p}{P_{\text{atm}}}
+    \label{eq:xeff}
+\end{equation}
+% where D = source-to-detector distance, p = chamber pressure, P_atm = atmospheric pressure.
+% This allows us to vary the effective path length without physically moving the source.
+
+% Our goal: measure the range and energy loss of 5.48 MeV alpha particles from Am-241
+% in four gases: air, helium, argon, and nitrogen. We compare results to theoretical
+% predictions from the Bethe formula and literature values.
+
+%===============================================================================
+\section{Procedure}
+\label{sec:procedure}
+%===============================================================================
+
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+% % Apparatus: vacuum chamber with permanently mounted solid-state detector (Ortec TU-014-050-100,
+% % S/N 36-104FF18, ion-implanted silicon, 50 mm^2 sensitive area, 14 keV energy resolution)
+% % and Am-241 alpha source (5.4431, 5.4857 MeV alpha energies; Q_alpha = 5.638 MeV).
+% % Source is movable via rack-and-pinion drive.
+% %
+% % Electronics chain (see block diagram):
+% %   Am-241 source -> solid-state detector -> charge-sensitive preamplifier (Canberra, 110 MOhm
+% %   in series with detector) -> variable attenuator (Kay) -> amplifier (Ortec Model 450)
+% %   -> MCA (Amptek Pocket MCA-8000A, connected via COM5) and oscilloscope
+% %
+% % Detector biased at +40V (positive bias, p-layer negative w.r.t. n-layer).
+% % One e-h pair per 3.62 eV energy deposited in silicon at 300K.
+% %
+% % Vacuum system: mechanical pump, digital manometer (absolute pressure in mmHg).
+% % Chamber not pumped below 50 mmHg to prevent detector damage.
+% % Gases available: air (ambient), helium, argon, nitrogen (supplied from external tanks).
+
+% % Include block diagram figure here
+% % \begin{figure}[htbp]
+% %     \centering
+% %     \includegraphics[width=0.8\textwidth]{figures/block_diagram.png}
+% %     \caption{Block diagram of the electronics chain.}
+% %     \label{fig:block_diagram}
+% % \end{figure}
+
+% \subsection{Energy Calibration}
+% \label{sec:calibration}
+
+% % Used a pulse generator to inject known charge into the preamplifier test input via
+% % a precisely known capacitor C_1 = 0.4095 +/- 0.001 pF.
+% %
+% % Energy equivalent of pulser voltage:
+\begin{equation}
+    E(\text{MeV}) = 2.26 \times 10^{13} \cdot C_1 \cdot V_{\text{pulser}}
+    \label{eq:calibration}
+\end{equation}
+
+Pulser output measured under loaded conditions (93 Ohm cable + 93 Ohm termination at scope).
+
+Pulser settings: 1 kHz frequency, 0.330V offset, 5 microsec width, 5 ns edge.
+Scope: Ch1 vertical 0.200 V, trigger 0.3 V; Ch2 vertical 2V, time scale 4 microsec.
+
+MCA settings for all measurements:
+  - 3 dB attenuation
+  - 1024 ADC Gain
+  - 10V maximum input voltage
+  - 40V detector bias
+
+Collected calibration spectra at 12 pulser voltages (15 s each), ranging from
+0.035 V (0.32 MeV equivalent) to 0.575 V (5.32 MeV equivalent).
+Determined centroid channel for each peak.
+
+Calibration data:
+
+% | Pulser Voltage (V) | Equiv. Energy (MeV) | Centroid Channel | Std (channels) |
+% |---------------------|---------------------|------------------|----------------|
+% | 0.035               | 0.324               | 59.04            | 0.85           |
+% | 0.075               | 0.694               | 124.18           | 0.85           |
+% | 0.125               | 1.157               | 208.89           | 1.59           |
+% | 0.175               | 1.620               | 292.37           | 2.80           |
+% | 0.225               | 2.082               | 375.56           | 1.62           |
+% | 0.275               | 2.545               | 453.39           | 1.60           |
+% | 0.325               | 3.008               | 542.05           | 4.30           |
+% | 0.375               | 3.471               | 618.12           | 3.34           |
+% | 0.425               | 3.933               | 708.89           | 1.60           |
+% | 0.475               | 4.396               | 783.09           | 0.85           |
+% | 0.525               | 4.859               | 875.60           | 6.20           |
+% | 0.575               | 5.321               | 953.50           | 0.87           |
+
+\begin{table}[htbp]
+    \centering
+    \caption{Energy calibration data}
+    \label{tab:calibration-data}
+    \begin{tabular}{cccc}
+        \toprule
+        Pulser Voltage (V) & Equiv. Energy (MeV) & Centroid Channel & Std (channels) \\
+        \midrule
+        0.035 & 0.324 & 59.04  & 0.85 \\
+        0.075 & 0.694 & 124.18 & 0.85 \\
+        0.125 & 1.157 & 208.89 & 1.59 \\
+        0.175 & 1.620 & 292.37 & 2.80 \\
+        0.225 & 2.082 & 375.56 & 1.62 \\
+        0.275 & 2.545 & 453.39 & 1.60 \\
+        0.325 & 3.008 & 542.05 & 4.30 \\
+        0.375 & 3.471 & 618.12 & 3.34 \\
+        0.425 & 3.933 & 708.89 & 1.60 \\
+        0.475 & 4.396 & 783.09 & 0.85 \\
+        0.525 & 4.859 & 875.60 & 6.20 \\
+        0.575 & 5.321 & 953.50 & 0.87 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Linear fit: $\text{Channel} = m * \text{Energy} + b$, with $R^2 = 0.9997$.
+This confirms the system is linear and properly calibrated.
+
+Include calibration plot figure here
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{figures/calibration.png}
+%     \caption{Energy calibration: MCA channel number vs.\ equivalent energy (MeV).
+%     Linear fit with $R^2 = 0.9997$.}
+%     \label{fig:calibration}
+% \end{figure}
+
+\subsection{Measurement Procedure}
+\label{sec:measurement}
+
+At atmospheric pressure, moved source away from detector until counts disappeared completely.
+Source disappears at 108 mm on the scale (at trigger 100 mV/div, STP).
+Locked source at this position (108 mm) for all subsequent measurements.
+
+Source-to-detector distance D: determined from the 108 mm scale reading and the
+chamber geometry (see Fig. 6 of lab manual). Need to compute actual separation.
+
+For each gas, varied chamber pressure and recorded MCA spectra.
+Collection time: 45 s per spectrum (initially tried 15 s but data was too noisy).
+Pressure measured with digital manometer, accuracy +/- 0.1 mmHg.
+
+After collecting each spectrum, recorded:
+  - Chamber pressure (mmHg)
+  - Approximate peak channel (centroid)
+  - Total counts in the peak
+
+Converted channel -> energy using the calibration fit.
+Computed $X_eff = D * p / P_atm$ for each pressure point.
+Computed $E^2$ for $E^2$ vs $X_eff$ analysis.
+
+Pressure uncertainties: standard deviation of pressure during each 45 s acquisition
+was recorded for each trial.
+
+\subsubsection{Air}
+\label{sec:air_procedure}
+
+Measured at 16 pressures from 54.8 to 765.1 mmHg.
+At 765.1 mmHg: no counts detected (beyond range).
+At 721.2 mmHg: barely visible, channel ~56, only 54 total counts.
+At 674.9 mmHg and below: clear peaks with ~1000--1200 counts per 45 s.
+Took additional high-pressure points (686.6, 700.8, 711.9 mmHg) for better
+resolution near the cutoff where counts drop off.
+
+Also collected distance-variation data at atmospheric pressure:
+source moved from 94 mm to 106 mm in 2 mm steps (8 points).
+
+\subsubsection{Helium}
+\label{sec:he_procedure}
+
+Flushed chamber with helium. Some initial issues with vacuum controls after flushing,
+but self-corrected after a few trials.
+
+Measured at 19 pressures from 50.9 to 2000+ mmHg.
+Helium has much longer range than air -- needed to go to pressures well above
+atmospheric (up to ~2000 mmHg) to see significant energy loss.
+At 50.9 mmHg: observed clipping in MCA; this data point is suspect.
+Even at 2000+ mmHg, peak was still at channel ~624 (significant remaining energy).
+
+\subsubsection{Argon}
+\label{sec:ar_procedure}
+
+Measured at 16 pressures from 50.4 to 782.0 mmHg.
+At 782.0 mmHg: only 1 count detected (beyond range).
+At 770.8 mmHg: channel ~50, only 40 counts -- near the cutoff.
+Observed clipping at around channel 47 (affects 770.8 and 759.6 mmHg data).
+At 726.4 mmHg: 1987 total counts (unusually high -- collected for longer or
+pressure was stable at a point with high transmission).
+
+Argon has shorter range than air due to higher Z (Z=18).
+
+\subsubsection{Nitrogen}
+\label{sec:n2_procedure}
+
+Measured at 24 pressures from 50.8 to 782.3 mmHg.
+At 782.3 mmHg: only 1 count (beyond range).
+At 749.4 mmHg: 2 counts. At 727.8 mmHg: 17 counts. Gradual onset.
+
+Took many additional points around 250--440 mmHg and 650--730 mmHg for
+better resolution in regions of interest.
+
+NOTE: Possible outliers at ~420 and ~256 Torr. Tested many other pressures
+around these and concluded these points were likely affected by outside variables.
+Nitrogen range is similar to air (expected, since air is ~78\% N2).
+
+%===============================================================================
+\section{Data Analysis and Results}
+\label{sec:results}
+%===============================================================================
+
+% TODO: Present and analyze results. Sections to include:
+%
+% 3.1 Calibration results
+%   - Linear fit parameters (slope, intercept, R^2)
+%   - Plot: Channel vs Energy
+%
+% 3.2 For each gas (Air, He, Ar, N2):
+%   - Count rate vs pressure plot (explain behavior: constant until near range, then sharp drop)
+%   - Why peaks widen with increasing pressure (more collisions -> more straggling)
+%   - E^2 vs pressure plot
+%   - E^2 vs X_eff plot with linear fit to extract k (where dE/dx = k/E)
+%   - Determine range R_0 = E_0^2 / (2k)
+%   - Compare to literature/Melissinos values
+%
+% 3.3 Comparison across gases
+%   - Compare ranges: He >> Air ~ N2 > Ar (expected from Z dependence)
+%   - Compare extracted k values
+%   - Bethe formula comparison
+%
+% 3.4 Error analysis
+%   - Pressure uncertainty: +/- 0.1 mmHg + std dev during acquisition
+%   - Channel/energy uncertainty: from calibration fit + peak width
+%   - X_eff uncertainty: propagated from D and p uncertainties
+%   - E^2 uncertainty: propagated from energy uncertainty
+%
+% Key data files:
+%   - csv/calibration.csv (calibration data with centroids and uncertainties)
+%   - Plots/data/{air,he,ar,n2}_data.csv (processed data with X_eff, E, E^2, count rate + errors)
+%   - MCA files in Air/Pressure/, He/Pressure/, Ar/Pressure/, N2/Pressure/
+%   - Distance data in Air/Distance/
+
+%===============================================================================
+\section{Discussion and Conclusions}
+\label{sec:conclusion}
+%===============================================================================
+
+% TODO: Discuss results in context.
+%
+% - How well does E^2 vs X_eff linearity hold? Where does it break down?
+% - Meaning of k varying with energy (Bethe formula predicts log dependence, not pure 1/E)
+% - Comparison of range in different gases to theoretical expectations
+% - Discuss straggling, Bragg peak
+% - Sources of systematic error (clipping at low channels, vacuum control issues with He)
+% - Comparison to example report's ~10% discrepancy with literature
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}
