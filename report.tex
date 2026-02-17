@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{article}[11pt]
 
 \usepackage{arxiv}
 
@@ -17,8 +17,34 @@
 \usepackage{natbib}
 \usepackage{doi}
 \usepackage{siunitx}
+\usepackage{setspace}
 
-\title{\textbf{Range of Alpha Particles in Gas}}
+%Macros
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\sbrak}[1]{\left[#1\right]}
+\newcommand{\cbrak}[1]{\left\{#1\right\}}
+
+\newcommand{\bra}[1]{\left\langle #1 \right\rvert}
+\newcommand{\ket}[1]{\left\lvert #1 \right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \left.\right\lvert #2 \right\rangle}
+\newcommand{\ketbra}[2]{\left\lvert #1 \right\rangle\!\!\left\langle #2 \right\lvert}
+
+\newcommand{\jand}{\quad\text{and}\quad}
+\newcommand{\jor}{\quad\text{or}\quad}
+\newcommand{\for}{\quad\text{for }\,}
+\newcommand{\comma}{,\quad}
+
+\newcommand{\ieval}[2]{\Bigg|^{#2}_{#1}}
+\newcommand{\deval}[1]{\bigg|_{#1}}
+
+\newcommand{\diff}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdiff}[2]{\frac{\partial#1}{\partial#2}}
+%End Macros
+
+\onehalfspacing
+
+
+\title{\textbf{Range of Alpha Particles in Various Gas}}
 
 \date{\today}
 
@@ -61,67 +87,49 @@
 \label{sec:intro}
 %===============================================================================
 
-% PURPOSE: Motivate the experiment, state what we're measuring, and give theoretical background.
+As alpha particles travel through a medium, they lose energy primarily through ionization, or the excitation of electrons in surrounding atoms.
+Due to the relatively low mass of alpha particles, in general, these interactions preserve the particles' original trajectories; for this reason, they travel nearly straight as they dissipate their energy.
 
-% Alpha particles lose energy primarily through ionization and excitation of atoms in the medium.
-% The moving charged particle exerts electromagnetic forces on atomic electrons, imparting energy.
-% In single electronic collisions, only a small fraction of energy is transferred; deflection is also small.
-% Alpha particles therefore travel nearly straight, continuously losing energy in many collisions.
-
-% The average linear rate of energy loss (stopping power) for a heavy charged particle
-% is given by the Bethe formula:
+A model for the stopping power of a medium can be found in \cite[pg. 159, eq. 2.10]{mel66}, which we restate here for convenience.
 \begin{equation}
-    -\frac{dE}{dx} = \frac{4\pi k_0^2 z^2 e^4 n}{m c^2 \beta^2}
-    \left[ \ln \frac{2 m c^2 \beta^2}{I(1-\beta^2)} - \beta^2 \right]
-    \label{eq:bethe}
+	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2) - \beta^2}}}	
 \end{equation}
-% where:
-%   k_0 = 8.99e9 N m^2 C^{-2}
-%   z = atomic number of projectile (z=2 for alpha)
-%   e = electron charge
-%   n = number of electrons per unit volume in medium
-%   m = electron rest mass
-%   beta = v/c of the particle
-%   I = mean excitation energy of the medium
-
-% The mean excitation energy I depends on atomic number z_m of the medium:
-%   I ~ 19.0 eV                  for z_m = 1
-%   I ~ 11.2 + 11.7 * z_m  eV   for 2 <= z_m <= 13
-%   I ~ 52.8 + 8.71 * z_m  eV   for z_m > 13
-
-% For non-relativistic heavy particles (like 5.48 MeV alphas), the Bethe formula simplifies
-% and predicts dE/dx ~ 1/E, i.e., stopping power increases as the particle slows down.
-% This leads to a characteristic Bragg peak near end of range.
-
-% The range R of a charged particle (distance traveled before coming to rest) can be
-% related to the energy by:
+where
+\begin{align*}
+	e &= \text{charge on an electron (C)} \\
+	z &= \text{atomic number of moving particle (z=2 for alpha particles)} \\
+	N &= \text{number of atoms per unit volumn } m^{-1} \\
+	m_e &= \text{mass of an electron (kg)} \\
+	v &= \text{velocity of moving particle (m/s)} \\
+	E &= \text{kinetic energy of moving particle (J)} \\
+	I &= \text{Mean ionization potential of medium (J)} \\
+	x &= \text{traveled distance of moving particle (m)} \\
+	\epsilon_0 &= \text{permativity of free space } (Nm^2/C)
+\end{align*}
+In this experiment, since our particles are relatively low-energy (around 5.48 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
 \begin{equation}
-    \frac{dE}{dx} = \frac{k}{E} \quad \Rightarrow \quad
-    R_0 = \frac{E_0^2}{2k}
+	-\diff{E}{x} \propto \frac{z^2M}{E}	
 \end{equation}
-% so E^2 vs x_eff should be linear if k is constant.
 
-% For alpha particles in air at 15 deg C and 760 Torr (from Melissinos):
-%   R = 0.56 * E       for E < 4 MeV
-%   R = 1.24 * E - 2.62  for 4 < E < 8 MeV
-
-% Two definitions of range:
-%   - Mean range R_m: absorber thickness that reduces alpha count by half
-%   - Extrapolated range R_e: extrapolate linear portion of transmission curve to zero
-
-% The effective distance through gas at reduced pressure is:
+In this experiment, our goal is to verify this relation using alpha particles emitted from Americium-241.
+We model our procedure after a procedure of a similar experiment as outlined in \cite[Ch. 5; Sec 3.2]{mel66}.
+With this setup, instead of manipulating the distance directly, the distance between the sample and the detector in this experiment was fixed, and the pressure within the experimentation vessel was varied to simulate various distances.
+To obtain the corresponding effective pressure at STP, we appeal to the following formula
 \begin{equation}
-    X_{\text{eff}} = \frac{D \cdot p}{P_{\text{atm}}}
-    \label{eq:xeff}
+	X_\text{eff} = \frac{Dp}{p_\text{atm}}	
 \end{equation}
-% where D = source-to-detector distance, p = chamber pressure, P_atm = atmospheric pressure.
-% This allows us to vary the effective path length without physically moving the source.
+where
+\begin{align*}
+	X_\text{eff} &= \text{effective distance at STP (m)} \\
+	D &= \text{physical distance between sample and detector} \\
+	p &= \text{pressure of experimentation vessel} \\
+	p_\text{atm} &= \text{standard atmospheric pressure (the value 760 mmHg was used in this experiment),}
+\end{align*}
+as it appears in \cite{mel66}.
 
-% Our goal: measure the range and energy loss of 5.48 MeV alpha particles from Am-241
-% in four gases: air, helium, argon, and nitrogen. We compare results to theoretical
-% predictions from the Bethe formula and literature values.
+In addition to collecting energy information, we also seek to investigate the count rate as it varies with respect to distance.
 
-%===============================================================================
+
 \section{Procedure}
 \label{sec:procedure}
 %===============================================================================
@@ -167,14 +175,14 @@ Energy equivalent of pulser voltage:
 
 Pulser output measured under loaded conditions (93 Ohm cable + 93 Ohm termination at scope).
 
-Pulser settings: 1 kHz frequency, 0.330V offset, 5 microsec width, 5 ns edge.
-Scope: Ch1 vertical 0.200 V, trigger 0.3 V; Ch2 vertical 2V, time scale 4 microsec.
+Pulser settings: 1 kHz frequency, 0.330V offset, 5 $\mu$s width, 5 ns edge.
+Scope: Ch1 vertical 0.200 V, trigger 0.3 V; Ch2 vertical 2V, time scale 4 $\mu$s.
 
 MCA settings for all measurements:
   - 3 dB attenuation
   - 1024 ADC Gain
   - 10V maximum input voltage
-  - 40V detector bias
+  - The amplifier bias for the detector was set at 40V
 
 Collected calibration spectra at 12 pulser voltages (15 s each), ranging from
 0.035 V (0.32 MeV equivalent) to 0.575 V (5.32 MeV equivalent).
@@ -231,6 +239,7 @@ with $R^2 = 0.9997$, confirming excellent linearity over the full 0.3--5.3\,MeV 
 The intercept is consistent with zero within its uncertainty, indicating no measurable
 offset in the electronics chain. This fit is used in all subsequent energy calculations.
 
+Include calibration plot figure here
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{plots/Images/calibration-plot.png}
