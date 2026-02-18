@@ -92,7 +92,7 @@ Due to the relatively low mass of alpha particles, in general, these interaction
 
 A model for the stopping power of a medium can be found in \cite[pg. 159, eq. 2.10]{mel66}, which we restate here for convenience.
 \begin{equation}
-	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2) - \beta^2}}}	
+	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2) - \beta^2}}}
 \end{equation}
 where
 \begin{align*}
@@ -108,7 +108,7 @@ where
 \end{align*}
 In this experiment, since our particles are relatively low-energy (around 5.48 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
 \begin{equation}
-	-\diff{E}{x} \propto \frac{z^2M}{E}	
+	-\diff{E}{x} \propto \frac{z^2M}{E}
 \end{equation}
 
 In this experiment, our goal is to verify this relation using alpha particles emitted from Americium-241.
@@ -116,7 +116,7 @@ We model our procedure after a procedure of a similar experiment as outlined in 
 With this setup, instead of manipulating the distance directly, the distance between the sample and the detector in this experiment was fixed, and the pressure within the experimentation vessel was varied to simulate various distances.
 To obtain the corresponding effective pressure at STP, we appeal to the following formula
 \begin{equation}
-	X_\text{eff} = \frac{Dp}{p_\text{atm}}	
+	X_\text{eff} = \frac{Dp}{p_\text{atm}}
 \end{equation}
 where
 \begin{align*}
@@ -180,6 +180,7 @@ Gases available: air (ambient), helium, argon, nitrogen (supplied from external 
 
 \subsection{Energy Calibration}
 \label{sec:calibration}
+
 
 Used a pulse generator to inject known charge into the preamplifier test input via
 a precisely known capacitor $C_1 = 0.4095 +/- 0.001$ pF.
@@ -358,14 +359,13 @@ Nitrogen range is similar to air (expected, since air is ~78\% N2).
 
 \subsection{Energy Calibration}
 \label{sec:results-calibration}
-
-The energy calibration (described in \S\ref{sec:calibration}) establishes the
-linear relationship between MCA channel number and particle energy.
-The fit parameters from Eq.~\ref{eq:calib-fit} are obtained by a weighted linear
-regression to the twelve pulser-voltage data points shown in
-Table~\ref{tab:calibration-data} and Fig.~\ref{fig:calibration}.
-The slope $b = 0.00559$\,MeV/channel and near-zero intercept confirm
-that the system is well-behaved and no gain correction is required.
+The data collected during the energy calibration procedure (described in \S\ref{sec:calibration}) yields a linear relationship (shown in
+Table~\ref{tab:calibration-data} and Fig.~\ref{fig:calibration}), which is what we expect given the specifications of the equipment provided by the manufacturer.
+Performing a linear regression, we obtain the formula
+\begin{align}
+	E &= (5.59*10^{-3})C - 0.01 \\
+	\sigma_E &= \sqrt{(0.03)^2 + ((5\times 10^{-5})C)^2 + ((5.59*10^{-3})\sigma_C)^2}
+\end{align}
 
 \subsection{Count Rate vs.\ Effective Distance}
 \label{sec:countrate}
