@@ -32,6 +32,6 @@ jobs:
         with:
           tag_name: release-${{ steps.vars.outputs.sha_short }}
           name: Release ${{ steps.vars.outputs.sha_short }}
-          files: main.pdf
+          files: report.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
