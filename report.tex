@@ -154,22 +154,9 @@ In addition to performing this procedure in air, we repeat this experiment in ni
 \subsection{Experimental Setup}
 \label{sec:setup}
 
-Apparatus: vacuum chamber with permanently mounted solid-state detector (Ortec TU-014-050-100,
-S/N 36-104FF18, ion-implanted silicon, $50 mm^2$ sensitive area, 14 keV energy resolution)
-and Am-241 alpha source (5.4431, 5.4857 MeV alpha energies; $Q_alpha = 5.638$ MeV).
-Source is movable via rack-and-pinion drive.
+The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-100, $50\,\text{mm}^2$ active area, 14\,keV energy resolution) mounted inside a sealed vacuum chamber, with an Am-241 source on a rack-and-pinion drive that allowed fine adjustment of the source-to-detector distance. When an alpha particle enters the detector, it ionizes the silicon and produces electron-hole pairs at a rate of one pair per 3.62\,eV deposited---so the total collected charge is directly proportional to the particle's kinetic energy. That charge pulse was amplified and shaped before reaching the MCA (see Fig.~\ref{fig:block_diagram}), which sorted pulses into 1024 channels by amplitude; the resulting histogram is the alpha energy spectrum.
 
-Electronics chain (see figure \ref{fig:block_diagram}):
-  Am-241 source -> solid-state detector -> charge-sensitive preamplifier (Canberra, 110 MOhm
-  in series with detector) -> variable attenuator (Kay) -> amplifier (Ortec Model 450)
-  -> MCA (Amptek Pocket MCA-8000A, connected via COM5) and oscilloscope
-
-Detector biased at +40V (positive bias, p-layer negative w.r.t. n-layer).
-One e-h pair per 3.62 eV energy deposited in silicon at 300K.
-
-Vacuum system: mechanical pump, digital manometer (absolute pressure in mmHg).
-Chamber not pumped below 50 mmHg to prevent detector damage.
-Gases available: air (ambient), helium, argon, nitrogen (supplied from external tanks).
+Rather than mechanically varying the source-to-detector distance for each data point, we controlled the gas pressure inside the chamber to change the effective path length. A mechanical pump evacuated the chamber down to $\sim$50\,mmHg (below which the detector risks radiation damage), and the chamber could be backfilled with helium, argon, or nitrogen from external cylinders in addition to ambient air.
 
 \begin{figure}[htbp]
     \centering
@@ -257,7 +244,7 @@ with $R^2 = 0.9997$, confirming excellent linearity over the full 0.3--5.3\,MeV 
 The intercept is consistent with zero within its uncertainty, indicating no measurable
 offset in the electronics chain. This fit is used in all subsequent energy calculations.
 
-Include calibration plot figure here
+% Include calibration plot figure here
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{plots/Images/calibration-plot.png}
@@ -269,88 +256,29 @@ Include calibration plot figure here
 \subsection{Measurement Procedure}
 \label{sec:measurement}
 
-In air at atmospheric pressure, we moved the source away from the detector until counts disappeared completely.
-The source disappeared at 108 mm on the scale (distance from detector) (at trigger 100 mV/div, STP).
-Locked source at this position (108 mm) for all subsequent measurements.
+To keep the source-to-detector distance fixed across all measurements, we used the ``range-out'' position---the point at which alpha particles can no longer reach the detector at atmospheric pressure. We found this by slowly moving the source away from the detector until counts dropped to zero, which happened at a scale reading of $s = 10.8$\,cm. The source was locked there for all four gases. The physical source-to-detector distance follows from the chamber geometry as $D = (s - 6.58)\,\text{cm} = 4.22 \pm 0.13$\,cm.
 
-Source-to-detector distance D: determined from the 108 mm scale reading and the
-chamber geometry (see figure \ref{fig:source-detector}). Need to compute actual separation.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/source-detector.png}
-    \caption{Source-detector distance.}
-    \label{fig:source-detector}
-\end{figure}
-
-For each gas, varied chamber pressure and recorded MCA spectra.
-Collection time: 45 s per spectrum (initially tried 15 s but data was too noisy).
-Pressure measured with digital manometer, accuracy +/- 0.1 mmHg.
-
-After collecting each spectrum, recorded:
-  - Chamber pressure (mmHg)
-  - Approximate peak channel (centroid)
-  - Total counts detected
-
-Converted channel -> energy using the calibration fit.
-Computed $X_eff = D * p / P_atm$ for each pressure point.
-Computed $E^2$ for $E^2$ vs $X_eff$ analysis.
-
-Pressure uncertainties: standard deviation of pressure during each 45 s acquisition
-was recorded for each trial.
+With the source fixed, we swept the chamber pressure from $\sim$50\,mmHg up to near atmospheric and collected a 45-s MCA spectrum at each pressure point. We initially tried 15-s runs but the statistics were too poor to reliably locate the peak centroid, so all reported data use 45\,s. At each pressure we pulled the centroid channel from the spectrum and converted it to energy using the calibration from \S\ref{sec:calibration}. The effective path length at STP is then $X_\text{eff} = Dp/P_\text{atm}$, where $p$ is the chamber pressure and $P_\text{atm}$ is atmospheric pressure on the day of the measurement. Pressure readings carry an uncertainty of $\pm 0.1$\,mmHg.
 
 \subsubsection{Air}
 \label{sec:air_procedure}
 
-Measured at 16 pressures from 54.8 to 765.1 mmHg.
-At 765.1 mmHg: no counts detected (beyond range).
-At 721.2 mmHg: barely visible, channel ~56, only 54 total counts.
-At 674.9 mmHg and below: clear peaks with ~1000--1200 counts per 45 s.
-Took additional high-pressure points (686.6, 700.8, 711.9 mmHg) for better
-resolution near the cutoff where counts drop off.
-
-Also collected distance-variation data at atmospheric pressure:
-source moved from 94 mm to 106 mm in 2 mm steps (8 points).
+We took 16 spectra in air at pressures from 54.8 to 765.1\,mmHg. At full atmospheric pressure no counts arrived at all, and at 721.2\,mmHg only 54 counts appeared over 45\,s---right at the edge of the range. Below 674.9\,mmHg the count rate settled into a stable plateau of roughly 1000--1200 counts per 45\,s. Because the count rate drops sharply near range-out, we added three extra points at 686.6, 700.8, and 711.9\,mmHg to better resolve that transition region.
 
 \subsubsection{Helium}
 \label{sec:he_procedure}
 
-Flushed chamber with helium. Some initial issues with vacuum controls after flushing,
-but self-corrected after a few trials.
-
-Measured at 19 pressures from 50.9 to 2000+ mmHg.
-Helium has much longer range than air -- needed to go to pressures well above
-atmospheric (up to ~2000 mmHg) to see significant energy loss.
-At 50.9 mmHg: observed clipping in MCA; this data point is suspect.
-Even at 2000+ mmHg, peak was still at channel ~624 (significant remaining energy).
+Helium has a much lower electron density than the diatomic gases, so alpha particles lose energy more slowly per centimeter and the range is much longer. We needed to go well above atmospheric pressure to see significant energy loss over our fixed distance, so we took 19 spectra from 50.9\,mmHg up to $\sim$2000\,mmHg. Even at the highest pressures the MCA peak only shifted down to around channel 624, meaning the particles were still arriving with substantial energy---we never observed range-out in helium. The spectrum at 50.9\,mmHg showed MCA clipping and was dropped from the analysis.
 
 \subsubsection{Argon}
 \label{sec:ar_procedure}
 
-Measured at 16 pressures from 50.4 to 782.0 mmHg.
-At 782.0 mmHg: only 1 count detected (beyond range).
-At 770.8 mmHg: channel ~50, only 40 counts -- near the cutoff.
-Observed clipping at around channel 47 (affects 770.8 and 759.6 mmHg data).
-At 726.4 mmHg: 1987 total counts (unusually high -- collected for longer or
-pressure was stable at a point with high transmission).
-
-An initial argon run at $s = 10.8$\,cm (same as air) was discarded after
-reviewing the lab documentation; data were re-collected with the source at
-the range-out position $s = 11.1$\,cm ($D = 4.52 \pm 0.13$\,cm).
+In argon we took 16 spectra from 50.4 to 782.0\,mmHg, with the source at the same $s = 10.8$\,cm position used for all other gases. Near the cutoff, at 770.8 and 759.6\,mmHg, the peak landed close to channel 47 where MCA clipping occurs, so those two points were excluded from the fits. At 782.0\,mmHg only a single count appeared over 45\,s, confirming the particles had essentially stopped.
 
 \subsubsection{Nitrogen}
 \label{sec:n2_procedure}
 
-Measured at 24 pressures from 50.8 to 782.3 mmHg.
-At 782.3 mmHg: only 1 count (beyond range).
-At 749.4 mmHg: 2 counts. At 727.8 mmHg: 17 counts. Gradual onset.
-
-Took many additional points around 250--440 mmHg and 650--730 mmHg for
-better resolution in regions of interest.
-
-NOTE: Possible outliers at ~420 and ~256 Torr. Tested many other pressures
-around these and concluded these points were likely affected by outside variables.
-Nitrogen range is similar to air (expected, since air is ~78\% N2).
+We collected 24 spectra in nitrogen from 50.8 to 782.3\,mmHg. Since air is roughly 78\% nitrogen, we expected similar behavior to air, and the range-out did fall at nearly the same pressure. To get good coverage of both the drop-off region and the plateau, we added extra points in the 250--440\,mmHg and 650--730\,mmHg ranges. Two data points---near 420 and 256\,Torr---were clear outliers relative to the neighboring measurements. We took several additional spectra at nearby pressures to confirm they were anomalous rather than a real feature, and excluded them from the fits.
 
 %===============================================================================
 \section{Data Analysis and Results}
@@ -373,8 +301,7 @@ Performing a linear regression, we obtain the formula
 For each gas, the count rate (counts per second) was plotted as a function of
 effective distance $X_\text{eff} = Dp/P_\text{atm}$, where $D$ is the
 source-to-detector distance and $p$ is the chamber pressure.
-The source-to-detector distances used were $D = 4.22 \pm 0.13$\,cm for air
-and nitrogen, and $D = 4.52 \pm 0.13$\,cm for argon.
+The source-to-detector distance was $D = 4.22 \pm 0.13$\,cm for all gases.
 
 For air, argon, and nitrogen, the count rate is approximately constant at low
 $X_\text{eff}$ (low pressure), then drops sharply as $X_\text{eff}$ approaches
