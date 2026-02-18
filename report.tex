@@ -128,6 +128,23 @@ where
 as it appears in \cite{mel66}.
 
 In addition to collecting energy information, we also seek to investigate the count rate as it varies with respect to distance.
+Since we expect some slight statistical fluctuations in the range of alpha particles, we estimate the probability distribution of the range of particles to be a Gaussian, which is given as
+\begin{equation}
+	P(r) = \frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}.
+\end{equation}
+where
+\begin{align*}
+	x &= \text{range of alpha particle (m)} \\
+	\bar x &= \text{average range of alpha particle (m)} \\
+	\alpha &= \text{straggling parameter}.
+\end{align*}
+Therefore, the following integral
+\begin{equation}
+	n_0 \paren{1 - \int_0^x	\frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}},
+\end{equation}
+denotes the expected relation between counts and distance, given some average range and some straggling parameter, where we take $n_0$ as the total number of counts emitted by the sample (per unit time).
+
+In addition to performing this procedure in air, we repeat this experiment in nitrogen, argon, and helium atmospheres to compare the results of changing atmospheres.
 
 
 \section{Procedure}
