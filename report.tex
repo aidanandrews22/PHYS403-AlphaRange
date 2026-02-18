@@ -110,12 +110,20 @@ In this experiment, since our particles are relatively low-energy (around 5.48 M
 \begin{equation}
 	-\diff{E}{x} \propto \frac{z^2M}{E}
 \end{equation}
+For some constant of proportionality, this relation can be integrated to achieve the following:
+\begin{align}
+	\int_{E_0}^{E(r)} E \,dE &= \int_0^{r}-kz^2M \,dx \\
+	{E}^2 - {E_0}^2 &= kz^2Mr.
+\end{align}
+Therefore, we expect a linear relationship between $E^2$: the energy of the particle, and $r$, the distance traveled, where $E_0$ is the initial energy of the particle.
 
-In this experiment, our goal is to verify this relation using alpha particles emitted from Americium-241.
-We model our procedure after a procedure of a similar experiment as outlined in \cite[Ch. 5; Sec 3.2]{mel66}.
-With this setup, instead of manipulating the distance directly, the distance between the sample and the detector in this experiment was fixed, and the pressure within the experimentation vessel was varied to simulate various distances.
+In this experiment, our goal is to verify this relation by observing this linear relationship using alpha particles emitted from Americium-241.
+In addition, using our data, we'd like to determine the range of these particles.
+
+We model our procedure after a similar experiment as outlined in \cite[Ch. 5; Sec 3.2]{mel66}.
+With this setup, instead of manipulating the distance directly, the distance between the sample and the detector was fixed, and the pressure within the experimental vessel was varied to simulate different distances.
 To obtain the corresponding effective pressure at STP, we appeal to the following formula
-\begin{equation}
+\begin{equation} \label{eq:eff_distance}
 	X_\text{eff} = \frac{Dp}{p_\text{atm}}
 \end{equation}
 where
@@ -128,7 +136,8 @@ where
 as it appears in \cite{mel66}.
 
 In addition to collecting energy information, we also seek to investigate the count rate as it varies with respect to distance.
-Since we expect some slight statistical fluctuations in the range of alpha particles, we estimate the probability distribution of the range of particles to be a Gaussian, which is given as
+Due to \textit{range straggling} \cite{andrews08}, we expect some slight statistical fluctuations in the range of alpha particles.
+In accordance with \cite{andrews08}, the probability distribution of the range of particles can be estimated to be a Gaussian, which is given as
 \begin{equation}
 	P(r) = \frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}.
 \end{equation}
@@ -139,12 +148,12 @@ where
 	\alpha &= \text{straggling parameter}.
 \end{align*}
 Therefore, the following integral
-\begin{equation}
-	n_0 \paren{1 - \int_0^x	\frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}},
+\begin{equation} \label{eq:err_func}
+	n_0 \paren{1 - \int_0^x	\frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}\,dx},
 \end{equation}
 denotes the expected relation between counts and distance, given some average range and some straggling parameter, where we take $n_0$ as the total number of counts emitted by the sample (per unit time).
 
-In addition to performing this procedure in air, we repeat this experiment in nitrogen, argon, and helium atmospheres to compare the results of changing atmospheres.
+In addition to performing this procedure in air, we repeat this experiment in nitrogen, argon, and helium atmospheres to compare the results of changing the atmosphere.
 
 
 \section{Procedure}
@@ -295,196 +304,112 @@ Performing a linear regression, we obtain the formula
 	\sigma_E &= \sqrt{(0.03)^2 + ((5\times 10^{-5})C)^2 + ((5.59*10^{-3})\sigma_C)^2}
 \end{align}
 
-\subsection{Count Rate vs.\ Effective Distance}
-\label{sec:countrate}
-
-For each gas, the count rate (counts per second) was plotted as a function of
-effective distance $X_\text{eff} = Dp/P_\text{atm}$, where $D$ is the
-source-to-detector distance and $p$ is the chamber pressure.
-The source-to-detector distance was $D = 4.22 \pm 0.13$\,cm for all gases.
-
-For air, argon, and nitrogen, the count rate is approximately constant at low
-$X_\text{eff}$ (low pressure), then drops sharply as $X_\text{eff}$ approaches
-the particle range. This is characteristic behavior: alphas lose nearly all
-their energy near the end of their path (Bragg peak), so a small increase
-in effective path length near the range causes a large reduction in detected
-count rate.
-
-% [Tyler]: Describe the ALFA1 fit model used in Origin:
-%   Equation: n0*(1 - integral(intgauss, 0, p, a, p0))
-%   What is p0 physically? (mean range) What is 'a'? (related to straggling width?)
-%   I think this section should explain the physical meaning of each fit parameter.
-
-The count rate data were fit in OriginPro using a user-defined model (ALFA1)
-based on the integral of a Gaussian, which accounts for range straggling.
-% [Tyler]: Expand on the model derivation/justification.
-The fit parameters for each gas are listed in Table~\ref{tab:countrate-fits}.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Count rate fit parameters (ALFA1 model) for air, argon, and nitrogen.
-             $n_0$ is the plateau count rate, $p_0$ is the mean range, and $a$
-             is a straggling parameter. % [Tyler]: confirm parameter definitions.
-             Helium showed no drop in count rate over the measured range
-             and is excluded from this table.}
-    \label{tab:countrate-fits}
-    \begin{tabular}{lccc}
-        \toprule
-        Gas & $n_0$ (s$^{-1}$) & $a$ & $p_0$ (cm) \\
-        \midrule
-        Air      & $23.83 \pm 0.33$ & $0.0919 \pm 0.0081$ & $3.925 \pm 0.004$ \\
-        Argon    & $23.37 \pm 0.52$ & $0.0700 \pm 0.0095$ & $4.195 \pm 0.005$ \\
-        Nitrogen & $23.28 \pm 0.27$ & $0.0870 \pm 0.0066$ & $3.943 \pm 0.003$ \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-Helium was also measured, but no range-out was observed over the full range of
-accessible pressures (up to approximately 2000\,mmHg, corresponding to
-$X_\text{eff} \approx 11$\,cm). The count rate for helium showed no
-statistically significant trend with $X_\text{eff}$ (linear fit slope
-$0.200 \pm 0.099$\,s$^{-1}$\,cm$^{-1}$, consistent with zero). Helium is
-therefore excluded from the direct range determination and is treated separately
-via energy analysis only.
-
-% TODO: Discuss peak broadening with increasing pressure -- why do the
-% MCA peaks get wider as pressure increases? Answer?: more scattering collisions
-% -> more energy straggling -> broader energy distribution at the detector.
-
-\subsection{Energy Squared vs.\ Effective Distance}
-\label{sec:e2}
-
-If the energy loss per unit distance follows $dE/dx = k/E$ (as expected for heavy
-charged particles in the relevant energy regime), then integrating from $E_0$ to zero
-over the full range $R_0$ gives the range:
+\subsection{Alpha Particle Range}
+\label{sec:alpharange}
+\subsubsection{Air}
+The first task was to convert pressure to effective distance with equation \ref{eq:eff_distance}.
+The distance used for this measurement was $4.22 \pm 0.13 cm$ (and a standard $760$ mmHg was used as $p_\text{atm}$).
+Then uncertainty can be obtained through the following formula
 \begin{equation}
-    R_0 = \frac{E_0^2}{2k},
-    \label{eq:range}
+	\sigma_{X_\text{eff}} = \sqrt{\paren{(p\sigma_{D}/p_\text{atm}}^2+\paren{(\sigma_{p}D/p_\text{atm}}^2}
 \end{equation}
-and the energy as a function of position:
+
+For air, plotting the count rate against the effective distance yields the graph in figure \ref{fig:air-counts}.
+\begin{figure}[h] \label{fig:air-counts}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_counts_plot.png}}
+	\caption{Count rate data plotted against effective range for experiment in air.
+		Equation \ref{eq:err_func} was then used to fit the trendline}
+\end{figure}
+Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm with a straggling parameter of $0.3 \pm 0.5$.
+
+
+Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
+\begin{figure}[h] \label{fig:air-energy}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_e2.png}}
+	\caption{Energy squared plotted against energy for experiment in air.
+	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
+	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.4$.}
+\end{figure}
+We wish to fit a linear regression with the points before they start to range out.
+Using the analysis from the count data, we know the particles begin to range out at 3.7.
+However, due to statistical variation, we wish to exclude points with $X_\text{eff} \le R_0-\alpha$ (At this range, 0.92 have yet to range out).
+Using this analysis, we obtain the trendline as observed in figure \ref{fig:air-energy}
+The trend of this fit supports equation \ref{eq:e2-linear} as outlined in \S\ref{sec:intro}.
+
+Using the intercept of thetrendline in figure \ref{fig:air-e2}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (the accepted value for Am-147 is 5.4 MeV)
+%TODO: Citation needed.
+In addition, by setting the $E^2 = 0$ (the point where the particles have no energy; hence range out), we can solve for $r$,
 \begin{equation}
-    E^2 = E_0^2 - 2k \cdot X_\text{eff}.
-    \label{eq:e2-linear}
+	r=-\frac{b}{a}
 \end{equation}
-Thus $E^2$ should be a linear decreasing function of $X_\text{eff}$ with slope $-2k$
-and $y$-intercept $E_0^2$. The range $R_0$ is then obtained as $R_0 = E_0^2 / (2k)$,
-equivalently the $x$-intercept of the $E^2$ vs.\ $X_\text{eff}$ line.
+where $a$ and $b$ are the slope and intercept, respectively.
+Here, $r$ presents the range of the particles, and using our parameters, we obtain the value $3.54\pm 0.08$ cm, which is within our uncertainty from our count rate analysis.
 
-$E^2$ vs.\ $X_\text{eff}$ was plotted for all four gases and fit with a linear
-model (Figs.~\ref{fig:air-e2}--\ref{fig:he-e2}). % [Tyler]: verify figure labels match
-The resulting fit parameters are given in Table~\ref{tab:e2-fits}.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Linear fit parameters for $E^2$ vs.\ $X_\text{eff}$.
-             The slope equals $-2k$ and the $x$-intercept gives the range $R_0$.
-             Helium values are extrapolated (range not directly observed).}
-    \label{tab:e2-fits}
-    \begin{tabular}{lcccc}
-        \toprule
-        Gas & $E_0^2$ (MeV$^2$) & Slope (MeV$^2$/cm) & $k$ (MeV$^2$/cm) & $R_0$ (cm) \\
-        \midrule
-        Air      & $29.95 \pm 0.45$ & $-8.473 \pm 0.227$ & $4.237 \pm 0.114$ & $3.535 \pm 0.109$ \\
-        Argon    & $29.57 \pm 0.49$ & $-7.917 \pm 0.242$ & $3.959 \pm 0.121$ & $3.734 \pm 0.130$ \\
-        Nitrogen & $29.68 \pm 0.44$ & $-8.368 \pm 0.228$ & $4.184 \pm 0.114$ & $3.547 \pm 0.110$ \\
-        Helium   & $30.77 \pm 0.28$ & $-1.649 \pm 0.058$ & $0.825 \pm 0.029$ & $18.65 \pm 0.68$ \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-% R_0 = intercept / |slope|, uncertainty via R_0 * sqrt((sigma_a/a)^2 + (sigma_b/b)^2)
-% Air:  R_0 = 29.951/8.473 = 3.536 cm,  sigma = 3.536*sqrt((0.446/29.95)^2+(0.227/8.473)^2) = 0.108 cm
-% Ar:   R_0 = 29.566/7.917 = 3.735 cm,  sigma = 3.735*sqrt((0.485/29.57)^2+(0.242/7.917)^2) = 0.130 cm
-% N2:   R_0 = 29.678/8.368 = 3.547 cm,  sigma = 3.547*sqrt((0.443/29.68)^2+(0.228/8.368)^2) = 0.110 cm
-% He:   R_0 = 30.766/1.649 = 18.66 cm,  sigma = 18.66*sqrt((0.282/30.77)^2+(0.058/1.649)^2) = 0.677 cm
-
-The $E^2$ vs.\ $X_\text{eff}$ relationship is linear for all gases in the
-well-measured energy region ($E \gtrsim 1$\,MeV). Data points at very low energies
-(near the end of range) deviate from the linear fit; these correspond to
-conditions where the alpha barely reaches the detector and the MCA peak channel
-is less reliable.
-% [Tyler]: Confirm whether those near-zero-energy points were included or
-% excluded from the linear fit, and note any zero-count replacement used.
-
-The intercept $E_0^2$ can be compared to the known Am-241 alpha energy:
-$E_0 = 5.486$\,MeV gives $E_0^2 = 30.10$\,MeV$^2$. All four gases yield
-intercepts consistent with this value within $1$--$2\sigma$, providing an
-independent consistency check on the calibration.
-
-% Sanity check: from air E vs Xeff quadratic fit, intercept = 5.485 +/- 0.031 MeV
-% (extracted directly from Origin). Known Am-241 principal energy = 5.4857 MeV.
-% Agreement is excellent.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/air_count_rate.png}
-    \caption{Count rate vs.\ $X_\text{eff}$ for alpha particles in air.
-             The plateau at $\approx 24$\,s$^{-1}$ is followed by a sharp drop
-             near the mean range $p_0 = 3.925$\,cm. The red curve is the ALFA1 fit.}
-    \label{fig:air-countrate}
+\subsubsection{Nitrogen}
+Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
+The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}.\footnote{Observing figure \ref{fig:n2-counts}, at an effective distance of 1.44 cm, a point was taken that was more than 14.6$\sigma$ from the value observed from values taken near it.
+	For this reason, this point was discarded when performing the analysis.}
+\begin{figure}[h] \label{fig:n2-counts}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_counts_plot.png}}
+	\caption{Count rate data plotted against effective range for experiment in nitrogen.
+		Equation \ref{eq:err_func} was then used to fit the trendline}
+\end{figure}
+\begin{figure}[h] \label{fig:n2-energy}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_e2.png}}
+	\caption{Energy squared plotted against effective range for experiment in nitrogen.
+	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
+	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.3$.}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/air_e2.png}
-    \caption{$E^2$ vs.\ $X_\text{eff}$ for alpha particles in air, with linear fit.
-             Slope $= -8.473 \pm 0.227$\,MeV$^2$/cm, giving $k = 4.237$\,MeV$^2$/cm
-             and extrapolated range $R_0 = 3.535 \pm 0.109$\,cm.}
-    \label{fig:air-e2}
+The corresponding alpha range as derived from the count rate is $3.7 \pm 0.5$ cm.
+From the energy data, we obtain a range of $3.56 \pm 0.06$ cm and an initial energy of $5.42 \pm 0.02$ MeV.
+This value is similar to that of air, which we expect since air is mostly nitrogen.
+
+\subsubsection{Argon}
+Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
+The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}.
+\begin{figure}[h] \label{fig:ar-counts}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_counts_plot.png}}
+	\caption{Count rate data plotted against effective range for experiment in argon.
+		Equation \ref{eq:err_func} was then used to fit the trendline}
+\end{figure}
+\begin{figure}[h] \label{fig:ar-energy}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_e2.png}}
+	\caption{Energy squared plotted against effective range for experiment in argon.
+	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
+	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.7$.}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/ar_countrate.png}
-    \caption{Count rate vs.\ $X_\text{eff}$ for alpha particles in argon.
-             Mean range $p_0 = 4.195$\,cm from ALFA1 fit.}
-    \label{fig:ar-countrate}
-\end{figure}
+The corresponding alpha range as derived from the count rate is $4.0 \pm 0.3$ cm.
+From the energy data, we obtain a range of $3.8 \pm 0.1$ cm and an initial energy of $5.34 \pm 0.06$ MeV.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/ar_e2.png}
-    \caption{$E^2$ vs.\ $X_\text{eff}$ for argon.
-             Slope $= -7.917 \pm 0.242$\,MeV$^2$/cm, $R_0 = 3.734 \pm 0.130$\,cm.}
-    \label{fig:ar-e2}
-\end{figure}
+%TODO: Add a reason
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/n2_count.png}
-    \caption{Count rate vs.\ $X_\text{eff}$ for alpha particles in nitrogen.
-             Mean range $p_0 = 3.943$\,cm. The outlier near $X_\text{eff} \approx 2$\,cm
-             % [Tyler]: explain this outlier -- was it excluded from the fit?
-             lies well below the plateau.}
-    \label{fig:n2-countrate}
+\subsubsection{Helium}
+Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
+\begin{figure}[h] \label{fig:he-counts}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_counts_plot.png}}
+	\caption{Count rate data plotted against effective range for experiment in helium.}
 \end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/n2_e2.png}
-    \caption{$E^2$ vs.\ $X_\text{eff}$ for nitrogen.
-             Slope $= -8.368 \pm 0.228$\,MeV$^2$/cm, $R_0 = 3.547 \pm 0.110$\,cm.}
-    \label{fig:n2-e2}
+for the points we measure, helium failed to range out.
+In figure \ref{fig:he-energy}, this is made even more apparent since the points don't intersect the $x$-axis.
+\begin{figure}[h] \label{fig:he-energy}
+	\centering
+	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_e2.png}}
+	\caption{Energy squared plotted against effective range for experiment in argon.
+	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
+	The trendline is obtained from a linear regression of every point.}
 \end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/He_count.png}
-    \caption{Count rate vs.\ $X_\text{eff}$ for helium. No drop-off is observed;
-             the linear fit slope ($0.20 \pm 0.10$\,s$^{-1}$\,cm$^{-1}$) is
-             consistent with zero. The alpha range in helium exceeds the maximum
-             achievable $X_\text{eff}$ at the pressures measured.}
-    \label{fig:he-countrate}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{plots/Images/he_e2.png}
-    \caption{$E^2$ vs.\ $X_\text{eff}$ for helium. Linear fit over the measured
-             range gives slope $= -1.649 \pm 0.058$\,MeV$^2$/cm,
-             extrapolating to $R_0 = 18.65 \pm 0.68$\,cm.}
-    \label{fig:he-e2}
-\end{figure}
+For this reason, we didn't filter the points when we ran the linear regression for energy squared versus effective distance.
+Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.016$ cm, and the initial energy of the particles is $5.54747 \pm 0.06$ MeV.
+Since helium is the lightest of all of the gases (meaning the alpha particles are able to retain more energy between collisions), and since helium is a noble gas like argon, this result is within expectation.
 
 %===============================================================================
 \section{Discussion and Conclusions}
