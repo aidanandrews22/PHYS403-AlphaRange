@@ -115,15 +115,16 @@ In this experiment, since our particles are relatively low-energy (around 5.48 M
 \end{equation}
 For some constant of proportionality, this relation can be integrated to achieve the following:
 \begin{align}
-	\int_{E_0}^{E(r)} E \,dE &= \int_0^{r}-kz^2M \,dx \\
-	{E}^2 - {E_0}^2 &= kz^2Mr. \label{eq:e2-linear-rel}
+	\int_{E_0}^{E} E' \,dE' &= \int_0^{r}-kz^2M \,dx \\
+	{E}^2 - {E_0}^2 &= -2kz^2Mr. \label{eq:e2-linear-rel}
 \end{align}
 Therefore, we expect a linear relationship between $E^2$: the energy of the particle, and $r$, the distance traveled, where $E_0$ is the initial energy of the particle.
 
-In this experiment, our goal is to verify this relation by observing this linear relationship using alpha particles emitted from Americium-241.
+In this experiment, our goal is to verify equation \ref{eq:e2-linear-rel} using alpha particles emitted from Americium-241.
+Using this, we also wish to verify parts of \cite[fig. 5.4]{mel66}.
 In addition, using our data, we'd like to determine the range of these particles.
 
-We model our procedure after a similar experiment as outlined in \cite[Ch. 5; Sec 3.2]{mel66}.
+We model our procedure after a similar experiment as outlined in \cite[Ch. 5; \S3.2]{mel66}.
 With this setup, instead of manipulating the distance directly, the distance between the sample and the detector was fixed, and the pressure within the experimental vessel was varied to simulate different distances.
 To obtain the corresponding effective pressure at STP, we appeal to the following formula
 \begin{equation} \label{eq:eff_distance}
@@ -310,6 +311,7 @@ Performing a linear regression, we obtain the formula
 \subsection{Alpha Particle Range}
 \label{sec:alpharange}
 \subsubsection{Air}
+\label{sec:air-analysis}
 The first task was to convert pressure to effective distance with equation \ref{eq:eff_distance}.
 The distance used for this measurement was $4.22 \pm 0.13$  cm (and a standard $760$ mmHg was used as $p_\text{atm}$).
 Then uncertainty can be obtained through the following formula
@@ -326,7 +328,6 @@ For air, plotting the count rate against the effective distance yields the graph
 \end{figure}
 Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm with a straggling parameter of $0.3 \pm 0.5$.
 
-
 Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
 \begin{figure}[h] \label{fig:air-energy}
 	\centering
@@ -341,13 +342,31 @@ However, due to statistical variation, we wish to exclude points with $X_\text{e
 Using this analysis, we obtain the trendline as observed in figure \ref{fig:air-energy}
 The trend of this fit supports equation \ref{eq:e2-linear-rel} as outlined in \S\ref{sec:intro}.
 
+Observe in equation \ref{eq:e2-linear-rel}, the intercept is the square of the initial energy.
+If we let $b$ be the intercept, then the uncertainty associated with this computation is
+\begin{equation}
+	\sigma_{E_0} = \frac{\sigma_b}{2\sqrt{b}}	
+\end{equation}
 Using the intercept of the trendline in figure \ref{fig:air-energy}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (according to \cite{qadr17}, the accepted value for Am-147 is 5.443 MeV).
+
 In addition, by setting the $E^2 = 0$ (the point where the particles have no energy; hence range out), we can solve for $r$,
 \begin{equation}
 	r=-\frac{b}{a}
 \end{equation}
 where $a$ and $b$ are the slope and intercept, respectively.
 Here, $r$ presents the range of the particles, and using our parameters, we obtain the value $3.54\pm 0.08$ cm, which is within our uncertainty from our count rate analysis.
+
+
+In addition, if we let $R$ represent the range of a particle, we can deduce its energy $E$ by using the regression model seen in \label{fig:air-energy} as follows:
+\begin{align}
+	E^2 = a(R_0 - R) + b = -aR
+\end{align}
+where $R_0$ is the range as computed before (x-intercept).
+Solving for $R$ and taking $\ln$ on both sides gives
+\begin{equation}
+	\log R = 2\log(E) - \log(a).
+\end{equation}
+Comparing with \cite[fig 5.4]{mel66}, we find these relationships match for where this linear regression was taken (which was from the initial energy of Am-241 alpha particles and right before they began to range out).
 
 \subsubsection{Nitrogen}
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
@@ -370,6 +389,8 @@ The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}
 The corresponding alpha range as derived from the count rate is $3.7 \pm 0.5$ cm.
 From the energy data, we obtain a range of $3.56 \pm 0.06$ cm and an initial energy of $5.42 \pm 0.02$ MeV.
 This value is similar to that of air, which we expect since air is mostly nitrogen.
+
+We find that this data produces a similar linear relationship between particle energy and range by running the same analysis as in \S\ref{sec:air-analysis}.
 
 \subsubsection{Argon}
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
@@ -399,6 +420,8 @@ Since we assume $\beta$ is small, we see that this high ionization potential con
 Therefore, this means particles in argon lose energy more slowly.
 This explanation very roughly explains the deviation from the previous results.
 
+We find that this data produces a similar linear relationship between particle energy and range by running the same analysis as in \S\ref{sec:air-analysis}.
+
 \subsubsection{Helium}
 Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
 \begin{figure}[h] \label{fig:he-counts}
@@ -418,6 +441,8 @@ In figure \ref{fig:he-energy}, this is made even more apparent since the points 
 For this reason, we didn't filter the points when we ran the linear regression for energy squared versus effective distance.
 Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.016$ cm, and the initial energy of the particles is $5.55 \pm 0.06$ MeV.
 Since helium is the lightest of all of the gases (meaning the alpha particles are able to retain more energy between collisions), and since helium is a noble gas (like argon), this result is within expectation.
+
+We find that this data produces a similar linear relationship between particle energy and range by running the same analysis as in \S\ref{sec:air-analysis}.
 
 %===============================================================================
 \section{Discussion and Conclusions}
@@ -439,7 +464,7 @@ we obtain table \ref{tb:acc-values}.
         Air 			& $3.548 \pm 0.08$ 	& $4.93\times 10^{-3}$	& 4.09 \\
         $\text{N}^2$ 	& $3.56 \pm 0.06$ 		& $4.85\times 10^{-3}$  & 4.16 \\
         Ar 				& $3.83 \pm 0.14$ 	& $7.25\times 10^{-3}$  & 4.36 \\
-        He 				& $18.64 \pm 0.016$ & $3..85\times 10^{-3}$ & 23.1 \\
+        He 				& $18.64 \pm 0.016$ & $3.85\times 10^{-3}$ & 23.1 \\
         \bottomrule
     \end{tabular}
 \end{table}
