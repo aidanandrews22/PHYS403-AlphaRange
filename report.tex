@@ -14,6 +14,7 @@
 \usepackage{microtype}
 \usepackage{cleveref}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{doi}
 \usepackage{siunitx}
@@ -45,7 +46,7 @@
 \onehalfspacing
 
 
-\title{\textbf{Range of Alpha Particles in Various Gas}}
+\title{\textbf{Range of Alpha Particles in Various Gases}}
 
 \date{\today}
 
@@ -62,10 +63,10 @@
 
 \renewcommand{\headeright}{}
 \renewcommand{\undertitle}{University of Illinois at Urbana-Champaign \\ PHYS 403}
-\renewcommand{\shorttitle}{Range of Alpha Particles in Gas}
+\renewcommand{\shorttitle}{Range of Alpha Particles in Gases}
 
 \hypersetup{
-	pdftitle={Range of Alpha Particles in Gas},
+	pdftitle={Range of Alpha Particles in Gases},
 	pdfsubject={Nuclear Physics, Alpha Particles, Energy Loss},
 	pdfauthor={Aidan Andrews, Tyler Wang},
 	pdfkeywords={Alpha Particles, Range, Energy Loss, Bethe Formula, Am-241},
@@ -76,7 +77,7 @@
 \maketitle
 
 \begin{abstract}
-    In this experiment, we investigate the range of alpha particles from Americium 141 in various gases.
+    In this experiment, we investigate the range of alpha particles from Americium-241 in various gases.
     Using a solid state detector, and by varying the pressure to simulate various distances, we obtain a relationship between energy and distance.
     With our data, we were also able to obtain a relationship between count rate and distance.
     Using this information, we were able to verify various theoretical predictions of energy loss within these media.
@@ -91,7 +92,7 @@
 %===============================================================================
 
 As alpha particles travel through a medium, they lose energy primarily through ionization, or the excitation of electrons in surrounding atoms.
-Due to the relatively low mass of alpha particles, in general, these interactions preserve the particles' original trajectories; for this reason, they travel nearly straight as they dissipate their energy.
+Because alpha particles are much heavier than the electrons they scatter off, each collision transfers very little transverse momentum to the alpha particle; for this reason, they travel in nearly straight lines as they dissipate their energy.
 
 A model for the stopping power of a medium can be found in \cite[pg. 159, eq. 2.10]{mel66}, which we restate here for convenience.
 \begin{equation} \label{eq:berte}
@@ -101,13 +102,13 @@ where
 \begin{align*}
 	e &= \text{charge on an electron (C)} \\
 	z &= \text{atomic number of moving particle (z=2 for alpha particles)} \\
-	N &= \text{number of atoms per unit volumn } m^{-1} \\
+	n_e &= \text{electron number density (m}^{-3}\text{)} \\
 	m_e &= \text{mass of an electron (kg)} \\
 	v &= \text{velocity of moving particle (m/s)} \\
 	E &= \text{kinetic energy of moving particle (J)} \\
 	I &= \text{Mean ionization potential of medium (J)} \\
 	x &= \text{traveled distance of moving particle (m)} \\
-	\epsilon_0 &= \text{permativity of free space } (Nm^2/C)
+	\epsilon_0 &= \text{permittivity of free space (N\,m}^2\text{/C}^2\text{)}
 \end{align*}
 In this experiment, since our particles are relatively low-energy (around 5.48 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
 \begin{equation} \label{eq:berte-non-rel}
@@ -167,7 +168,42 @@ In addition to performing this procedure in air, we repeat this experiment in ni
 \subsection{Experimental Setup}
 \label{sec:setup}
 
-The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-100, $50\,\text{mm}^2$ active area, 14\,keV energy resolution) mounted inside a sealed vacuum chamber, with an Am-241 source on a rack-and-pinion drive that allowed fine adjustment of the source-to-detector distance. When an alpha particle enters the detector, it ionizes the silicon and produces electron-hole pairs at a rate of one pair per 3.62\,eV deposited---so the total collected charge is directly proportional to the particle's kinetic energy. That charge pulse was amplified and shaped before reaching the MCA (see Fig.~\ref{fig:block_diagram}), which sorted pulses into 1024 channels by amplitude; the resulting histogram is the alpha energy spectrum.
+The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-100, $50\,\text{mm}^2$ active area, 14\,keV energy resolution) mounted inside a sealed vacuum chamber, with an Am-241 source on a rack-and-pinion drive that allowed fine adjustment of the source-to-detector distance. When an alpha particle enters the detector, it ionizes the silicon and produces electron-hole pairs at a rate of one pair per 3.62\,eV deposited---so the total collected charge is directly proportional to the particle's kinetic energy. That charge pulse was amplified and shaped before reaching the MCA (see Fig.~\ref{fig:block_diagram}), which sorted pulses into 1024 channels by amplitude; the resulting histogram is the alpha energy spectrum (see Fig.~\ref{fig:histograms}).
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/histograms/air_548-7651p.png}
+        \caption{Air (54.8--765.1\,mmHg)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/histograms/he_509-18735p.png}
+        \caption{Helium (50.9--1873.5\,mmHg)}
+    \end{subfigure}
+    \\[0.8em]
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/histograms/ar_504-7820p.png}
+        \caption{Argon (50.4--782.0\,mmHg)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/histograms/n2_508-7823p.png}
+        \caption{Nitrogen (50.8--782.3\,mmHg)}
+    \end{subfigure}
+    \\[0.8em]
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/histograms/mca_35-575p.png}
+        \caption{MCA calibration spectra}
+    \end{subfigure}
+    \caption{Stacked MCA spectra for each gas across the measured pressure range,
+    plus the pulser calibration spectra. Each trace corresponds to a single 45-s
+    acquisition; the peak shifts left as pressure increases and the effective path
+    length grows.}
+    \label{fig:histograms}
+\end{figure}
+
+
 
 Rather than mechanically varying the source-to-detector distance for each data point, we controlled the gas pressure inside the chamber to change the effective path length. A mechanical pump evacuated the chamber down to $\sim$50\,mmHg (below which the detector risks radiation damage), and the chamber could be backfilled with helium, argon, or nitrogen from external cylinders in addition to ambient air.
 
@@ -182,31 +218,12 @@ Rather than mechanically varying the source-to-detector distance for each data p
 \label{sec:calibration}
 
 
-Used a pulse generator to inject known charge into the preamplifier test input via
-a precisely known capacitor $C_1 = 0.4095 +/- 0.001$ pF.
-
-Energy equivalent of pulser voltage:
+To establish the energy-to-channel conversion, we used a pulse generator to inject known charges into the preamplifier input via a test capacitor of $C_1 = 0.4095 \pm 0.001$\,pF. The equivalent energy deposited for a given pulser voltage $V_\text{pulser}$ is
 \begin{equation}
     E(\text{MeV}) = 2.26 \times 10^{13} \cdot C_1 \cdot V_{\text{pulser}}
     \label{eq:calibration}
 \end{equation}
-
-Pulser output measured under loaded conditions (93 Ohm cable + 93 Ohm termination at scope).
-
-Pulser settings: 1 kHz frequency, 0.330V offset, 5 $\mu$s width, 5 ns edge.
-Scope: Ch1 vertical 0.200 V, trigger 0.3 V; Ch2 vertical 2V, time scale 4 $\mu$s.
-
-MCA settings for all measurements:
-  - 3 dB attenuation
-  - 1024 ADC Gain
-  - 10V maximum input voltage
-  - The amplifier bias for the detector was set at 40V
-
-Collected calibration spectra at 12 pulser voltages (15 s each), ranging from
-0.035 V (0.32 MeV equivalent) to 0.575 V (5.32 MeV equivalent).
-Determined centroid channel for each peak.
-
-Calibration data:
+We collected 15-s spectra at 12 pulser voltages from 0.035\,V to 0.575\,V, corresponding to equivalent energies of 0.32--5.32\,MeV. The centroid channel of each peak was extracted and is tabulated in Table~\ref{tab:calibration-data}.
 
 % | Pulser Voltage (V) | Equiv. Energy (MeV) | Centroid Channel | Std (channels) |
 % |---------------------|---------------------|------------------|----------------|
@@ -249,8 +266,8 @@ Calibration data:
 
 A linear fit $E = a + b \cdot \text{ch}$ to the twelve calibration points yields
 \begin{equation}
-    a = -0.00568 \pm 0.02777\ \text{MeV}, \quad
-    b = 0.00559 \pm 4.97 \times 10^{-5}\ \text{MeV/channel},
+    a = -0.006 \pm 0.028\ \text{MeV}, \quad
+    b = 5.59 \times 10^{-3} \pm 5.0 \times 10^{-5}\ \text{MeV/channel},
     \label{eq:calib-fit}
 \end{equation}
 with $R^2 = 0.9997$, confirming excellent linearity over the full 0.3--5.3\,MeV range.
@@ -304,8 +321,8 @@ The data collected during the energy calibration procedure (described in \S\ref{
 Table~\ref{tab:calibration-data} and Fig.~\ref{fig:calibration}), which is what we expect given the specifications of the equipment provided by the manufacturer.
 Performing a linear regression, we obtain the formula
 \begin{align}
-	E &= (5.59*10^{-3})C - 0.01 \\
-	\sigma_E &= \sqrt{(0.03)^2 + ((5\times 10^{-5})C)^2 + ((5.59*10^{-3})\sigma_C)^2}
+	E &= (5.59\times 10^{-3})C - 0.01 \\
+	\sigma_E &= \sqrt{(0.03)^2 + ((5\times 10^{-5})C)^2 + ((5.59\times 10^{-3})\sigma_C)^2}
 \end{align}
 
 \subsection{Alpha Particle Range}
@@ -316,39 +333,40 @@ The first task was to convert pressure to effective distance with equation \ref{
 The distance used for this measurement was $4.22 \pm 0.13$  cm (and a standard $760$ mmHg was used as $p_\text{atm}$).
 Then uncertainty can be obtained through the following formula
 \begin{equation}
-	\sigma_{X_\text{eff}} = \sqrt{\paren{(p\sigma_{D}/p_\text{atm}}^2+\paren{(\sigma_{p}D/p_\text{atm}}^2}
+	\sigma_{X_\text{eff}} = \sqrt{\paren{\frac{p\,\sigma_D}{p_\text{atm}}}^2 + \paren{\frac{D\,\sigma_p}{p_\text{atm}}}^2}
 \end{equation}
 
 For air, plotting the count rate against the effective distance yields the graph in figure \ref{fig:air-counts}.
-\begin{figure}[h] \label{fig:air-counts}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in air.
 		Equation \ref{eq:err_func} was then used to fit the trendline}
+	\label{fig:air-counts}
 \end{figure}
 Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm with a straggling parameter of $0.3 \pm 0.5$.
 
 Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
-\begin{figure}[h] \label{fig:air-energy}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_e2.png}}
 	\caption{Energy squared plotted against energy for experiment in air.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.4$.}
+	\label{fig:air-energy}
 \end{figure}
 We wish to fit a linear regression with the points before they start to range out.
 Using the analysis from the count data, we know the particles begin to range out at 3.7.
 However, due to statistical variation, we wish to exclude points with $X_\text{eff} \le R_0-\alpha$ (At this range, 0.92 have yet to range out).
-Using this analysis, we obtain the trendline as observed in figure \ref{fig:air-energy}
+Using this analysis, we obtain the trendline as observed in figure \ref{fig:air-energy}.
 The trend of this fit supports equation \ref{eq:e2-linear-rel} as outlined in \S\ref{sec:intro}.
 
 Observe in equation \ref{eq:e2-linear-rel}, the intercept is the square of the initial energy.
 If we let $b$ be the intercept, then the uncertainty associated with this computation is
 \begin{equation}
-	\sigma_{E_0} = \frac{\sigma_b}{2\sqrt{b}}	
+	\sigma_{E_0} = \frac{\sigma_b}{2\sqrt{b}}
 \end{equation}
-Using the intercept of the trendline in figure \ref{fig:air-energy}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (according to \cite{qadr17}, the accepted value for Am-147 is 5.443 MeV).
-
+Using the intercept of the trendline in figure \ref{fig:air-energy}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (according to \cite{qadr17}, the accepted value for Am-241 is 5.443 MeV).
 In addition, by setting the $E^2 = 0$ (the point where the particles have no energy; hence range out), we can solve for $r$,
 \begin{equation}
 	r=-\frac{b}{a}
@@ -372,18 +390,20 @@ Comparing with \cite[fig 5.4]{mel66}, we find these relationships match for wher
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
 The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}.\footnote{Observing figure \ref{fig:n2-counts}, at an effective distance of 1.44 cm, a point was taken that was more than 14.6$\sigma$ from the value observed from values taken near it.
 	For this reason, this point was discarded when performing the analysis.}
-\begin{figure}[h] \label{fig:n2-counts}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in nitrogen.
 		Equation \ref{eq:err_func} was then used to fit the trendline}
+	\label{fig:n2-counts}
 \end{figure}
-\begin{figure}[h] \label{fig:n2-energy}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in nitrogen.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.3$.}
+	\label{fig:n2-energy}
 \end{figure}
 
 The corresponding alpha range as derived from the count rate is $3.7 \pm 0.5$ cm.
@@ -394,19 +414,21 @@ We find that this data produces a similar linear relationship between particle e
 
 \subsubsection{Argon}
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
-The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}.
-\begin{figure}[h] \label{fig:ar-counts}
+The results are displayed in figures \ref{fig:ar-counts} and \ref{fig:ar-energy}.
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in argon.
 		Equation \ref{eq:err_func} was then used to fit the trendline}
+	\label{fig:ar-counts}
 \end{figure}
-\begin{figure}[h] \label{fig:ar-energy}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in argon.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.7$.}
+	\label{fig:ar-energy}
 \end{figure}
 
 The corresponding alpha range as derived from the count rate is $4.0 \pm 0.3$ cm.
@@ -424,22 +446,24 @@ We find that this data produces a similar linear relationship between particle e
 
 \subsubsection{Helium}
 Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
-\begin{figure}[h] \label{fig:he-counts}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in helium.}
+	\label{fig:he-counts}
 \end{figure}
 for the points we measure, helium failed to range out.
 In figure \ref{fig:he-energy}, this is made even more apparent since the points don't intersect the $x$-axis.
-\begin{figure}[h] \label{fig:he-energy}
+\begin{figure}[h]
 	\centering
 	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_e2.png}}
-	\caption{Energy squared plotted against effective range for experiment in argon.
+	\caption{Energy squared plotted against effective range for experiment in helium.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of every point.}
+	\label{fig:he-energy}
 \end{figure}
 For this reason, we didn't filter the points when we ran the linear regression for energy squared versus effective distance.
-Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.016$ cm, and the initial energy of the particles is $5.55 \pm 0.06$ MeV.
+Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.02$ cm, and the initial energy of the particles is $5.55 \pm 0.06$ MeV.
 Since helium is the lightest of all of the gases (meaning the alpha particles are able to retain more energy between collisions), and since helium is a noble gas (like argon), this result is within expectation.
 
 We find that this data produces a similar linear relationship between particle energy and range by running the same analysis as in \S\ref{sec:air-analysis}.
@@ -451,32 +475,29 @@ As observed in \S\ref{sec:results}, the values that were obtained for initial en
 
 Then, for the ranges which we computed, comparing against the values found in \cite{nistdata},\footnote{We convert their values to compare with ours by dividing by the density of the corresponding gas.
 These values were found \url{https://physics.nist.gov/cgi-bin/Star/compos.pl?refer=ap&matno=104}}
-we obtain table \ref{tb:acc-values}.
+we obtain table \ref{tab:nist-comparison}.
 
-\begin{table} \label{tb:acc-values}
+\begin{table}[htbp]
     \centering
     \caption{Measured ranges and NIST projected ranges, values obtained from \cite{nistdata}.}
-    \label{tab:calibration-data}
+    \label{tab:nist-comparison}
     \begin{tabular}{cccc}
         \toprule
-        Gas & Measure Range (cm) & NIST Range $(\text{g/cm}^2)$ & Converted Range (cm) \\
+        Gas & Measured Range (cm) & NIST Range $(\text{g/cm}^2)$ & Converted Range (cm) \\
         \midrule
-        Air 			& $3.548 \pm 0.08$ 	& $4.93\times 10^{-3}$	& 4.09 \\
-        $\text{N}^2$ 	& $3.56 \pm 0.06$ 		& $4.85\times 10^{-3}$  & 4.16 \\
-        Ar 				& $3.83 \pm 0.14$ 	& $7.25\times 10^{-3}$  & 4.36 \\
-        He 				& $18.64 \pm 0.016$ & $3.85\times 10^{-3}$ & 23.1 \\
+        Air             & $3.55 \pm 0.08$   & $4.93\times 10^{-3}$  & 4.09 \\
+        $\text{N}_2$    & $3.56 \pm 0.06$   & $4.85\times 10^{-3}$  & 4.16 \\
+        Ar              & $3.83 \pm 0.14$   & $7.25\times 10^{-3}$  & 4.36 \\
+        He              & $18.64 \pm 0.02$  & $3.85\times 10^{-3}$  & 23.1 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Unfortunately, we observe some significant deviation from the values we computed.
-From what we can tell, the particles we observe seem to lose energy much faster than they should.
-This can be due to numerous reasons, for example, the atmosphere we experimented in could contain some impurities which might impact our result.
-In addition, we noticed the multi-channel analyzer clipping near the edges, which could impact some of the data that we obtained.
+The measured ranges are systematically lower than the NIST projected values, indicating that the effective stopping power in our setup was higher than in the pure reference gases.
+The most likely cause is trace impurities in the gas samples---water vapor in particular has a higher stopping power than nitrogen or the noble gases---though a systematic offset in the physical distance $D$ between the source housing and the active silicon layer also cannot be ruled out.
+MCA clipping at high pressures in argon affected two data points, which were excluded from the fits; any residual gain nonlinearity at the high end of the energy scale could also bias the extracted range downward.
 
-In the future, to help reduce error bars, which would improve our fit for count rate versus count rate plots, we could take data for longer periods of time.
-In addition, we didn't have access to the tools to monitor the uncertainty in pressure until halfway through the experiment.
-More precise monitoring of the uncertainty of pressure could help us reduce the error bars in the effective distance, since we likely overestimated the error in many of these points.
+In the future, taking longer spectra near range-out (where count rates are low and statistics are poor) would improve the count rate fits, and a more careful determination of the source-to-active-layer distance would reduce the dominant systematic uncertainty in $X_\text{eff}$.
 
 However, the results we obtained successfully verified equation \ref{eq:berte-non-rel} and theoretical predictions of the energy of alpha particles produced by Am-241 atoms.
 
