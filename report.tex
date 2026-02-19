@@ -18,6 +18,7 @@
 \usepackage{doi}
 \usepackage{siunitx}
 \usepackage{setspace}
+\usepackage{url}
 
 %Macros
 \newcommand{\paren}[1]{\left(#1\right)}
@@ -69,15 +70,17 @@
 	pdfauthor={Aidan Andrews, Tyler Wang},
 	pdfkeywords={Alpha Particles, Range, Energy Loss, Bethe Formula, Am-241},
 }
+\allowdisplaybreaks
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-    % TODO: Write after results/discussion are complete.
-    % Should summarize: measured range of Am-241 alpha particles in air, He, Ar, N2
-    % using solid-state detector + MCA. Compare to Bethe formula predictions.
-    % Mention agreement/discrepancy with literature values.
+    In this experiment, we investigate the range of alpha particles from Americium 141 in various gases.
+    Using a solid state detector, and by varying the pressure to simulate various distances, we obtain a relationship between energy and distance.
+    With our data, we were also able to obtain a relationship between count rate and distance.
+    Using this information, we were able to verify various theoretical predictions of energy loss within these media.
+    We then compare these results with accepted values from the NIST.
 \end{abstract}
 
 % \keywords{Alpha Particles}
@@ -91,8 +94,8 @@ As alpha particles travel through a medium, they lose energy primarily through i
 Due to the relatively low mass of alpha particles, in general, these interactions preserve the particles' original trajectories; for this reason, they travel nearly straight as they dissipate their energy.
 
 A model for the stopping power of a medium can be found in \cite[pg. 159, eq. 2.10]{mel66}, which we restate here for convenience.
-\begin{equation}
-	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2) - \beta^2}}}
+\begin{equation} \label{eq:berte}
+	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2)}} - \beta^2}
 \end{equation}
 where
 \begin{align*}
@@ -107,13 +110,13 @@ where
 	\epsilon_0 &= \text{permativity of free space } (Nm^2/C)
 \end{align*}
 In this experiment, since our particles are relatively low-energy (around 5.48 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
-\begin{equation}
+\begin{equation} \label{eq:berte-non-rel}
 	-\diff{E}{x} \propto \frac{z^2M}{E}
 \end{equation}
 For some constant of proportionality, this relation can be integrated to achieve the following:
 \begin{align}
 	\int_{E_0}^{E(r)} E \,dE &= \int_0^{r}-kz^2M \,dx \\
-	{E}^2 - {E_0}^2 &= kz^2Mr.
+	{E}^2 - {E_0}^2 &= kz^2Mr. \label{eq:e2-linear-rel}
 \end{align}
 Therefore, we expect a linear relationship between $E^2$: the energy of the particle, and $r$, the distance traveled, where $E_0$ is the initial energy of the particle.
 
@@ -282,7 +285,7 @@ Helium has a much lower electron density than the diatomic gases, so alpha parti
 \subsubsection{Argon}
 \label{sec:ar_procedure}
 
-In argon we took 16 spectra from 50.4 to 782.0\,mmHg, with the source at the same $s = 10.8$\,cm position used for all other gases. Near the cutoff, at 770.8 and 759.6\,mmHg, the peak landed close to channel 47 where MCA clipping occurs, so those two points were excluded from the fits. At 782.0\,mmHg only a single count appeared over 45\,s, confirming the particles had essentially stopped.
+In argon, we took 16 spectra from 50.4 to 782.0\,mmHg, with the source at the same $s = 10.8$\,cm position used for all other gases. Near the cutoff, at 770.8 and 759.6\,mmHg, the peak landed close to channel 47 where MCA clipping occurs, so those two points were excluded from the fits. At 782.0\,mmHg only a single count appeared over 45\,s, confirming the particles had essentially stopped.
 
 \subsubsection{Nitrogen}
 \label{sec:n2_procedure}
@@ -308,7 +311,7 @@ Performing a linear regression, we obtain the formula
 \label{sec:alpharange}
 \subsubsection{Air}
 The first task was to convert pressure to effective distance with equation \ref{eq:eff_distance}.
-The distance used for this measurement was $4.22 \pm 0.13 cm$ (and a standard $760$ mmHg was used as $p_\text{atm}$).
+The distance used for this measurement was $4.22 \pm 0.13$  cm (and a standard $760$ mmHg was used as $p_\text{atm}$).
 Then uncertainty can be obtained through the following formula
 \begin{equation}
 	\sigma_{X_\text{eff}} = \sqrt{\paren{(p\sigma_{D}/p_\text{atm}}^2+\paren{(\sigma_{p}D/p_\text{atm}}^2}
@@ -336,10 +339,9 @@ We wish to fit a linear regression with the points before they start to range ou
 Using the analysis from the count data, we know the particles begin to range out at 3.7.
 However, due to statistical variation, we wish to exclude points with $X_\text{eff} \le R_0-\alpha$ (At this range, 0.92 have yet to range out).
 Using this analysis, we obtain the trendline as observed in figure \ref{fig:air-energy}
-The trend of this fit supports equation \ref{eq:e2-linear} as outlined in \S\ref{sec:intro}.
+The trend of this fit supports equation \ref{eq:e2-linear-rel} as outlined in \S\ref{sec:intro}.
 
-Using the intercept of thetrendline in figure \ref{fig:air-e2}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (the accepted value for Am-147 is 5.4 MeV)
-%TODO: Citation needed.
+Using the intercept of the trendline in figure \ref{fig:air-energy}, we obtain that the initial energy of these particles is $5.43 \pm 0.03$ MeV (according to \cite{qadr17}, the accepted value for Am-147 is 5.443 MeV).
 In addition, by setting the $E^2 = 0$ (the point where the particles have no energy; hence range out), we can solve for $r$,
 \begin{equation}
 	r=-\frac{b}{a}
@@ -387,9 +389,15 @@ The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}
 \end{figure}
 
 The corresponding alpha range as derived from the count rate is $4.0 \pm 0.3$ cm.
-From the energy data, we obtain a range of $3.8 \pm 0.1$ cm and an initial energy of $5.34 \pm 0.06$ MeV.
+From the energy data, we obtain a range of $3.83 \pm 0.14$ cm and an initial energy of $5.34 \pm 0.06$ MeV.
 
-%TODO: Add a reason
+Since argon has a very high ionization potential, observing the $\ln$ term in equation \ref{eq:berte}, we find that this high ionization potential lowers the magnitude of this term (since the numerator in this term is orders of magnitude larger than the denominator).
+Since we assume $\beta$ is small, we see that this high ionization potential contributes to a lowering in terms of
+\begin{equation}
+	\sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2)}} - \beta^2}
+\end{equation}
+Therefore, this means particles in argon lose energy more slowly.
+This explanation very roughly explains the deviation from the previous results.
 
 \subsubsection{Helium}
 Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
@@ -408,22 +416,45 @@ In figure \ref{fig:he-energy}, this is made even more apparent since the points 
 	The trendline is obtained from a linear regression of every point.}
 \end{figure}
 For this reason, we didn't filter the points when we ran the linear regression for energy squared versus effective distance.
-Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.016$ cm, and the initial energy of the particles is $5.54747 \pm 0.06$ MeV.
-Since helium is the lightest of all of the gases (meaning the alpha particles are able to retain more energy between collisions), and since helium is a noble gas like argon, this result is within expectation.
+Then, using this line, like before, we can compute the range of the particle, which we find is $18.64 \pm 0.016$ cm, and the initial energy of the particles is $5.55 \pm 0.06$ MeV.
+Since helium is the lightest of all of the gases (meaning the alpha particles are able to retain more energy between collisions), and since helium is a noble gas (like argon), this result is within expectation.
 
 %===============================================================================
 \section{Discussion and Conclusions}
 \label{sec:conclusion}
-%===============================================================================
+As observed in \S\ref{sec:results}, the values that were obtained for initial energy were very close to the accepted values for Am-241.
 
-% TODO: Discuss results in context.
-%
-% - How well does E^2 vs X_eff linearity hold? Where does it break down?
-% - Meaning of k varying with energy (Bethe formula predicts log dependence, not pure 1/E)
-% - Comparison of range in different gases to theoretical expectations
-% - Discuss straggling, Bragg peak
-% - Sources of systematic error (clipping at low channels, vacuum control issues with He)
-% - Comparison to example report's ~10% discrepancy with literature
+Then, for the ranges which we computed, comparing against the values found in \cite{nistdata},\footnote{We convert their values to compare with ours by dividing by the density of the corresponding gas.
+These values were found \url{https://physics.nist.gov/cgi-bin/Star/compos.pl?refer=ap&matno=104}}
+we obtain table \ref{tb:acc-values}.
+
+\begin{table} \label{tb:acc-values}
+    \centering
+    \caption{Measured ranges and NIST projected ranges, values obtained from \cite{nistdata}.}
+    \label{tab:calibration-data}
+    \begin{tabular}{cccc}
+        \toprule
+        Gas & Measure Range (cm) & NIST Range $(\text{g/cm}^2)$ & Converted Range (cm) \\
+        \midrule
+        Air 			& $3.548 \pm 0.08$ 	& $4.93\times 10^{-3}$	& 4.09 \\
+        $\text{N}^2$ 	& $3.56 \pm 0.06$ 		& $4.85\times 10^{-3}$  & 4.16 \\
+        Ar 				& $3.83 \pm 0.14$ 	& $7.25\times 10^{-3}$  & 4.36 \\
+        He 				& $18.64 \pm 0.016$ & $3..85\times 10^{-3}$ & 23.1 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Unfortunately, we observe some significant deviation from the values we computed.
+From what we can tell, the particles we observe seem to lose energy much faster than they should.
+This can be due to numerous reasons, for example, the atmosphere we experimented in could contain some impurities which might impact our result.
+In addition, we noticed the multi-channel analyzer clipping near the edges, which could impact some of the data that we obtained.
+
+In the future, to help reduce error bars, which would improve our fit for count rate versus count rate plots, we could take data for longer periods of time.
+In addition, we didn't have access to the tools to monitor the uncertainty in pressure until halfway through the experiment.
+More precise monitoring of the uncertainty of pressure could help us reduce the error bars in the effective distance, since we likely overestimated the error in many of these points.
+
+However, the results we obtained successfully verified equation \ref{eq:berte-non-rel} and theoretical predictions of the energy of alpha particles produced by Am-241 atoms.
+
 
 \nocite{*}
 \bibliographystyle{alpha}
