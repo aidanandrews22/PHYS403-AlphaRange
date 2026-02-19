@@ -20,6 +20,7 @@
 \usepackage{siunitx}
 \usepackage{setspace}
 \usepackage{url}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
 
 %Macros
 \newcommand{\paren}[1]{\left(#1\right)}
@@ -94,7 +95,7 @@
 As alpha particles travel through a medium, they lose energy primarily through ionization, or the excitation of electrons in surrounding atoms.
 Because alpha particles are much heavier than the electrons they scatter off, each collision transfers very little transverse momentum to the alpha particle; for this reason, they travel in nearly straight lines as they dissipate their energy.
 
-A model for the stopping power of a medium can be found in \cite[pg. 159, eq. 2.10]{mel66}, which we restate here for convenience.
+A model for the stopping power of a medium can be found in \cite[pg. 159; eq. 2.10]{mel66}, which we restate here for convenience.
 \begin{equation} \label{eq:berte}
 	-\diff{E}{x}= \paren{\frac{1}{4\pi \epsilon_0}}\frac{4\pi z^2 e^4}{m_ev^2}n_e \sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2)}} - \beta^2}
 \end{equation}
@@ -110,16 +111,16 @@ where
 	x &= \text{traveled distance of moving particle (m)} \\
 	\epsilon_0 &= \text{permittivity of free space (N\,m}^2\text{/C}^2\text{)}
 \end{align*}
-In this experiment, since our particles are relatively low-energy (around 5.48 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
+In this experiment, since our particles are relatively low-energy (around 5.443 MeV), we take the non-relativistic limit, which \cite[pg. 158]{mel66} gives as
 \begin{equation} \label{eq:berte-non-rel}
 	-\diff{E}{x} \propto \frac{z^2M}{E}
 \end{equation}
-For some constant of proportionality, this relation can be integrated to achieve the following:
+For some constant of proportionality, this relation can be integrated to obtain the following:
 \begin{align}
 	\int_{E_0}^{E} E' \,dE' &= \int_0^{r}-kz^2M \,dx \\
 	{E}^2 - {E_0}^2 &= -2kz^2Mr. \label{eq:e2-linear-rel}
 \end{align}
-Therefore, we expect a linear relationship between $E^2$: the energy of the particle, and $r$, the distance traveled, where $E_0$ is the initial energy of the particle.
+Therefore, we expect a linear relationship between $E^2$: the energy of the particle, $r$: the distance traveled, and $E_0$: the initial energy of the particle.
 
 In this experiment, our goal is to verify equation \ref{eq:e2-linear-rel} using alpha particles emitted from Americium-241.
 Using this, we also wish to verify parts of \cite[fig. 5.4]{mel66}.
@@ -133,11 +134,12 @@ To obtain the corresponding effective pressure at STP, we appeal to the followin
 \end{equation}
 where
 \begin{align*}
-	X_\text{eff} &= \text{effective distance at STP (m)} \\
-	D &= \text{physical distance between sample and detector} \\
-	p &= \text{pressure of experimentation vessel} \\
-	p_\text{atm} &= \text{standard atmospheric pressure (the value 760 mmHg was used in this experiment),}
+	X_\text{eff} &= \text{effective distance at STP (cm)} \\
+	D &= \text{physical distance between sample and detector (cm)} \\
+	p &= \text{pressure of experimentation vessel (mmHg)} \\
+	p_\text{atm} &= \text{standard atmospheric pressure (mmHg)\footnotemark,}
 \end{align*}
+\footnotetext{The value 760 mmHg was used in this experiment}
 as it appears in \cite{mel66}.
 
 In addition to collecting energy information, we also seek to investigate the count rate as it varies with respect to distance.
@@ -156,7 +158,7 @@ Therefore, the following integral
 \begin{equation} \label{eq:err_func}
 	n_0 \paren{1 - \int_0^x	\frac{1}{\alpha \sqrt{\pi}}\exp\paren{-\frac{(x-\bar x)^2}{\alpha^2}}\,dx},
 \end{equation}
-denotes the expected relation between counts and distance, given some average range and some straggling parameter, where we take $n_0$ as the total number of counts emitted by the sample (per unit time).
+denotes the expected relation between counts and distance, where $n_0$ is the total number of counts emitted by the sample (per unit time).
 
 In addition to performing this procedure in air, we repeat this experiment in nitrogen, argon, and helium atmospheres to compare the results of changing the atmosphere.
 
@@ -318,7 +320,7 @@ We collected 24 spectra in nitrogen from 50.8 to 782.3\,mmHg. Since air is rough
 \subsection{Energy Calibration}
 \label{sec:results-calibration}
 The data collected during the energy calibration procedure (described in \S\ref{sec:calibration}) yields a linear relationship (shown in
-Table~\ref{tab:calibration-data} and Fig.~\ref{fig:calibration}), which is what we expect given the specifications of the equipment provided by the manufacturer.
+Table \ref{tab:calibration-data} and Fig.~\ref{fig:calibration}), which is what we expect given the specifications of the equipment provided by the manufacturer.
 Performing a linear regression, we obtain the formula
 \begin{align}
 	E &= (5.59\times 10^{-3})C - 0.01 \\
@@ -339,9 +341,9 @@ Then uncertainty can be obtained through the following formula
 For air, plotting the count rate against the effective distance yields the graph in figure \ref{fig:air-counts}.
 \begin{figure}[h]
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_counts_plot.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/air_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in air.
-		Equation \ref{eq:err_func} was then used to fit the trendline}
+		Equation \ref{eq:err_func} was then used to fit the trendline.}
 	\label{fig:air-counts}
 \end{figure}
 Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm with a straggling parameter of $0.3 \pm 0.5$.
@@ -349,7 +351,7 @@ Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm w
 Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
 \begin{figure}[h]
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/air_e2.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/air_e2.png}}
 	\caption{Energy squared plotted against energy for experiment in air.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.4$.}
@@ -392,14 +394,14 @@ The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}
 	For this reason, this point was discarded when performing the analysis.}
 \begin{figure}[h]
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_counts_plot.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/n2_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in nitrogen.
 		Equation \ref{eq:err_func} was then used to fit the trendline}
 	\label{fig:n2-counts}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[h] 
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/n2_e2.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/n2_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in nitrogen.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.3$.}
@@ -417,14 +419,14 @@ Using the same method, the plots of count rate and energy squared against effect
 The results are displayed in figures \ref{fig:ar-counts} and \ref{fig:ar-energy}.
 \begin{figure}[h]
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_counts_plot.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/ar_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in argon.
 		Equation \ref{eq:err_func} was then used to fit the trendline}
 	\label{fig:ar-counts}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[h] 
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/ar_e2.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/ar_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in argon.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.7$.}
@@ -446,9 +448,9 @@ We find that this data produces a similar linear relationship between particle e
 
 \subsubsection{Helium}
 Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
-\begin{figure}[h]
+\begin{figure}[h] 
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_counts_plot.png}}
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/he_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in helium.}
 	\label{fig:he-counts}
 \end{figure}
@@ -456,8 +458,8 @@ for the points we measure, helium failed to range out.
 In figure \ref{fig:he-energy}, this is made even more apparent since the points don't intersect the $x$-axis.
 \begin{figure}[h]
 	\centering
-	\resizebox{0.8\linewidth}{!}{\includegraphics{plots/PyPlots/he_e2.png}}
-	\caption{Energy squared plotted against effective range for experiment in helium.
+	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/he_e2.png}}
+	\caption{Energy squared plotted against effective range for experiment in argon.
 	A scaled Gaussian (using the parameters from the count rate analysis) is plotted in blue.
 	The trendline is obtained from a linear regression of every point.}
 	\label{fig:he-energy}
@@ -477,10 +479,10 @@ Then, for the ranges which we computed, comparing against the values found in \c
 These values were found \url{https://physics.nist.gov/cgi-bin/Star/compos.pl?refer=ap&matno=104}}
 we obtain table \ref{tab:nist-comparison}.
 
-\begin{table}[htbp]
+\begin{table}
     \centering
     \caption{Measured ranges and NIST projected ranges, values obtained from \cite{nistdata}.}
-    \label{tab:nist-comparison}
+    \label{tb:acc-values}
     \begin{tabular}{cccc}
         \toprule
         Gas & Measured Range (cm) & NIST Range $(\text{g/cm}^2)$ & Converted Range (cm) \\
