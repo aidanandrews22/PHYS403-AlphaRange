@@ -172,7 +172,7 @@ In addition to performing this procedure in air, we repeat this experiment in ni
 
 The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-100, $50\,\text{mm}^2$ active area, 14\,keV energy resolution) mounted inside a sealed vacuum chamber, with an Am-241 source on a rack-and-pinion drive that allowed fine adjustment of the source-to-detector distance. When an alpha particle enters the detector, it ionizes the silicon and produces electron-hole pairs at a rate of one pair per 3.62\,eV deposited---so the total collected charge is directly proportional to the particle's kinetic energy. That charge pulse was amplified and shaped before reaching the MCA (see Fig.~\ref{fig:block_diagram}), which sorted pulses into 1024 channels by amplitude; the resulting histogram is the alpha energy spectrum (see Fig.~\ref{fig:histograms}).
 
-\begin{figure}[h]
+\begin{figure}[hbt!]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{plots/histograms/air_548-7651p.png}
@@ -199,9 +199,11 @@ The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-1
         \caption{MCA calibration spectra}
     \end{subfigure}
     \caption{Stacked MCA spectra for each gas across the measured pressure range,
-    plus the pulser calibration spectra. Each trace corresponds to a single 45-s
-    acquisition; the peak shifts left as pressure increases and the effective path
-    length grows.}
+    Plus the pulser calibration spectra. Each trace corresponds to a single 45-s
+    acquisition; the peak shifts left as pressure increases, and the effective path
+    length grows.
+    Observe the peaks widening as we move towards the lower energies.
+    Due to the increased distance traveled by these lower energy particles, the statistical fluctuations caused by range straggling are magnified, thus causing the increased variance at these extremes.}
     \label{fig:histograms}
 \end{figure}
 
@@ -209,9 +211,9 @@ The core of the apparatus was a solid-state silicon detector (Ortec TU-014-050-1
 
 Rather than mechanically varying the source-to-detector distance for each data point, we controlled the gas pressure inside the chamber to change the effective path length. A mechanical pump evacuated the chamber down to $\sim$50\,mmHg (below which the detector risks radiation damage), and the chamber could be backfilled with helium, argon, or nitrogen from external cylinders in addition to ambient air.
 
-\begin{figure}[htbp]
+\begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/block_diagram.png}
+    \includegraphics[width=0.6\textwidth]{figures/block_diagram.png}
     \caption{Block diagram of the electronics chain.}
     \label{fig:block_diagram}
 \end{figure}
@@ -339,7 +341,7 @@ Then uncertainty can be obtained through the following formula
 \end{equation}
 
 For air, plotting the count rate against the effective distance yields the graph in figure \ref{fig:air-counts}.
-\begin{figure}[h]
+\begin{figure}[hbt!]
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/air_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in air.
@@ -348,8 +350,7 @@ For air, plotting the count rate against the effective distance yields the graph
 \end{figure}
 Using the data from the fit, we estimate the average range is $3.7 \pm 0.5$ cm with a straggling parameter of $0.3 \pm 0.5$.
 
-Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
-\begin{figure}[h]
+\begin{figure}[hbt!]
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/air_e2.png}}
 	\caption{Energy squared plotted against energy for experiment in air.
@@ -357,6 +358,7 @@ Moving on, we plot the square of the energy against effective distance and obtai
 	The trendline is obtained from a linear regression of points with $X_\text{eff}\le 3.4$.}
 	\label{fig:air-energy}
 \end{figure}
+Moving on, we plot the square of the energy against effective distance and obtain the plot in figure \ref{fig:air-energy}.
 We wish to fit a linear regression with the points before they start to range out.
 Using the analysis from the count data, we know the particles begin to range out at 3.7.
 However, due to statistical variation, we wish to exclude points with $X_\text{eff} \le R_0-\alpha$ (At this range, 0.92 have yet to range out).
@@ -374,15 +376,15 @@ In addition, by setting the $E^2 = 0$ (the point where the particles have no ene
 	r=-\frac{b}{a}
 \end{equation}
 where $a$ and $b$ are the slope and intercept, respectively.
-Here, $r$ presents the range of the particles, and using our parameters, we obtain the value $3.54\pm 0.08$ cm, which is within our uncertainty from our count rate analysis.
+Here, $r$ presents the range of the particles emitted from Am-241, and using our parameters, we obtain the value $3.54\pm 0.08$ cm, which is within our uncertainty from our count rate analysis.
 
 
-In addition, if we let $R$ represent the range of a particle, we can deduce its energy $E$ by using the regression model seen in \label{fig:air-energy} as follows:
+In addition, if we let $R$ represent the range of a particle, we can deduce its energy $E$ by using the regression model seen in figure \ref{fig:air-energy} as follows:
 \begin{align}
 	E^2 = a(R_0 - R) + b = -aR
 \end{align}
 where $R_0$ is the range as computed before (x-intercept).
-Solving for $R$ and taking $\ln$ on both sides gives
+Solving for $R$ and taking $\log$ on both sides gives
 \begin{equation}
 	\log R = 2\log(E) - \log(a).
 \end{equation}
@@ -392,14 +394,14 @@ Comparing with \cite[fig 5.4]{mel66}, we find these relationships match for wher
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
 The results are displayed in figures \ref{fig:n2-counts} and \ref{fig:n2-energy}.\footnote{Observing figure \ref{fig:n2-counts}, at an effective distance of 1.44 cm, a point was taken that was more than 14.6$\sigma$ from the value observed from values taken near it.
 	For this reason, this point was discarded when performing the analysis.}
-\begin{figure}[h]
+\begin{figure}[hbt!]
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/n2_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in nitrogen.
-		Equation \ref{eq:err_func} was then used to fit the trendline}
+		Equation \ref{eq:err_func} was then used to fit the trendline.}
 	\label{fig:n2-counts}
 \end{figure}
-\begin{figure}[h] 
+\begin{figure}[hbt!] 
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/n2_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in nitrogen.
@@ -417,14 +419,14 @@ We find that this data produces a similar linear relationship between particle e
 \subsubsection{Argon}
 Using the same method, the plots of count rate and energy squared against effective distance are analyzed.
 The results are displayed in figures \ref{fig:ar-counts} and \ref{fig:ar-energy}.
-\begin{figure}[h]
+\begin{figure}[hbt!]
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/ar_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in argon.
-		Equation \ref{eq:err_func} was then used to fit the trendline}
+		Equation \ref{eq:err_func} was then used to fit the trendline.}
 	\label{fig:ar-counts}
 \end{figure}
-\begin{figure}[h] 
+\begin{figure}[hbt!] 
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/ar_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in argon.
@@ -437,18 +439,18 @@ The corresponding alpha range as derived from the count rate is $4.0 \pm 0.3$ cm
 From the energy data, we obtain a range of $3.83 \pm 0.14$ cm and an initial energy of $5.34 \pm 0.06$ MeV.
 
 Since argon has a very high ionization potential, observing the $\ln$ term in equation \ref{eq:berte}, we find that this high ionization potential lowers the magnitude of this term (since the numerator in this term is orders of magnitude larger than the denominator).
-Since we assume $\beta$ is small, we see that this high ionization potential contributes to a lowering in terms of
+Since we assume $\beta$ is small, we see that this high ionization potential contributes to decreasing the magnitude. of the term
 \begin{equation}
-	\sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2)}} - \beta^2}
+	\sbrak{\ln\paren{\frac{2m_e v^2}{I(1-\beta^2)}} - \beta^2}.
 \end{equation}
-Therefore, this means particles in argon lose energy more slowly.
-This explanation very roughly explains the deviation from the previous results.
+Therefore, particles in argon lose energy more slowly.
+This explanation very roughly explains how this deviation from previous results is supported by the theory.
 
 We find that this data produces a similar linear relationship between particle energy and range by running the same analysis as in \S\ref{sec:air-analysis}.
 
 \subsubsection{Helium}
-Observing the countrate vs effective distance plot for helium in figure \ref{fig:he-counts},
-\begin{figure}[h] 
+Observing the count rate vs effective distance plot for helium in figure \ref{fig:he-counts},
+\begin{figure}[hbt!] 
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/he_counts_plot.png}}
 	\caption{Count rate data plotted against effective range for experiment in helium.}
@@ -456,7 +458,7 @@ Observing the countrate vs effective distance plot for helium in figure \ref{fig
 \end{figure}
 for the points we measure, helium failed to range out.
 In figure \ref{fig:he-energy}, this is made even more apparent since the points don't intersect the $x$-axis.
-\begin{figure}[h]
+\begin{figure}[hbt!]
 	\centering
 	\resizebox{0.6\linewidth}{!}{\includegraphics{plots/PyPlots/he_e2.png}}
 	\caption{Energy squared plotted against effective range for experiment in argon.
@@ -477,12 +479,12 @@ As observed in \S\ref{sec:results}, the values that were obtained for initial en
 
 Then, for the ranges which we computed, comparing against the values found in \cite{nistdata},\footnote{We convert their values to compare with ours by dividing by the density of the corresponding gas.
 These values were found \url{https://physics.nist.gov/cgi-bin/Star/compos.pl?refer=ap&matno=104}}
-we obtain table \ref{tab:nist-comparison}.
+we obtain table \ref{tab:acc-values}.
 
-\begin{table}
+\begin{table}[hbt!]
     \centering
     \caption{Measured ranges and NIST projected ranges, values obtained from \cite{nistdata}.}
-    \label{tb:acc-values}
+    \label{tab:acc-values}
     \begin{tabular}{cccc}
         \toprule
         Gas & Measured Range (cm) & NIST Range $(\text{g/cm}^2)$ & Converted Range (cm) \\
@@ -495,7 +497,7 @@ we obtain table \ref{tab:nist-comparison}.
     \end{tabular}
 \end{table}
 
-The measured ranges are systematically lower than the NIST projected values, indicating that the effective stopping power in our setup was higher than in the pure reference gases.
+The measured ranges are systematically lower than the NIST projected values, indicating that the effective stopping power in our setup was higher than what the NIST projects.
 The most likely cause is trace impurities in the gas samples---water vapor in particular has a higher stopping power than nitrogen or the noble gases---though a systematic offset in the physical distance $D$ between the source housing and the active silicon layer also cannot be ruled out.
 MCA clipping at high pressures in argon affected two data points, which were excluded from the fits; any residual gain nonlinearity at the high end of the energy scale could also bias the extracted range downward.
 
